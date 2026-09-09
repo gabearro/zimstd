@@ -1,4 +1,4 @@
-## Greedy LZ77 with a 64 KiB hash table and predefined FSE codes.
+## Configurable block-local LZ77 with a 64 KiB hash table and predefined FSE codes.
 import common, xxhash
 import std/[endians, streams]
 
@@ -122,18 +122,61 @@ proc addBlock(dst: var string, data: openArray[char], kind, last: int) =
   for i in 0..2: dst[old+i] = char((header shr (8*i)) and 255)
   if data.len > 0: copyMem(addr dst[old+3], unsafeAddr data[0], data.len)
 
+const
+  MinCompressionLevel* = -131072
+  DefaultCompressionLevel* = 3
+  MaxCompressionLevel* = 22
+
+proc compressionLevel(level: int): int =
+  require(level >= MinCompressionLevel and level <= MaxCompressionLevel,
+          "compression level must be between -131072 and 22")
+  if level == 0: DefaultCompressionLevel else: level
+
+proc matchLength(data: openArray[char], p, prev: int): int {.inline.} =
+  result = 4 # Caller checked the first four bytes.
+  while p+result+8 <= data.len:
+    var a, b: uint64
+    copyMem(addr a, unsafeAddr data[p+result], 8)
+    copyMem(addr b, unsafeAddr data[prev+result], 8)
+    if a != b: break
+    result += 8
+  while p+result < data.len and data[p+result] == data[prev+result]: inc result
+
 type EncodeScratch = object
+  chain: seq[uint32]
   sequences: seq[Sequence]
   literals: string
 
+proc bestMatch(scratch: EncodeScratch, data: openArray[char], p, head, depth: int): tuple[pos, length: int] =
+  var candidate = head
+  var attempts = 0
+  let value = word(data, p)
+  while candidate >= 0 and attempts < depth:
+    if word(data, candidate) == value:
+      let length = matchLength(data, p, candidate)
+      if length > result.length:
+        result = (candidate, length)
+        if p+length == data.len: break
+    candidate = int(scratch.chain[candidate])-1
+    inc attempts
+
 proc encodeBlock(scratch: var EncodeScratch, data: openArray[char],
-                 result: var string, last: int) =
+                 result: var string, last, level: int, deep: static bool) =
   # Loads use initialized presence bits or a full position-table clear below.
   var table {.noinit.}: array[16384, uint32]
   var seen {.noinit.}: array[256, uint64]
   const start = 0
   let stop = data.len
   let size = stop
+  when deep:
+    # ponytail: bounded hash chains, not libzstd's optimal parser; add optimal
+    # parsing/adaptive entropy if matching libzstd's high-level ratios is needed.
+    const depths = [2,3,4,6,8,12,16,24,32,48,64,96,128,192,256,384,512,768,1024]
+    let depth = depths[level-4]
+    scratch.chain.setLen(size)
+  else:
+    let acceleration = if level < 0: -level else: 1
+    let skipShift = if level < 0: 4 elif level == 1: 5 elif level == 2: 6 else: 7
   var run = size > 0
   for i in start+1..<stop:
     if data[i] != data[start]:
@@ -145,7 +188,7 @@ proc encodeBlock(scratch: var EncodeScratch, data: openArray[char],
   else:
     # Preserve the full hash and match choices for short messages, while
     # clearing 2 KiB of presence bits instead of 64 KiB of positions.
-    let sparse = size < 1024
+    let sparse = not deep and size < 1024
     if sparse: zeroMem(addr seen[0], sizeof(seen))
     else: zeroMem(addr table[0], sizeof(table))
     template replaceSlot(h, position: int): uint32 =
@@ -158,6 +201,7 @@ proc encodeBlock(scratch: var EncodeScratch, data: openArray[char],
           seen[index shr 6] = seen[index shr 6] or bit
         else: previous = table[index]
         table[index] = uint32(position)
+        when deep: scratch.chain[position-1] = previous
         previous
     scratch.sequences.setLen(0)
     scratch.literals.setLen(0)
@@ -167,27 +211,37 @@ proc encodeBlock(scratch: var EncodeScratch, data: openArray[char],
     while p+4 <= stop:
       let v = word(data, p)
       let h = hash(v)
-      let prev = start+int(replaceSlot(h, p-start+1))-1
-      if prev >= start and word(data, prev) == v:
-        var length = 4
-        while p+length+8 <= stop:
-          var a, b: uint64
-          copyMem(addr a, unsafeAddr data[p+length], 8)
-          copyMem(addr b, unsafeAddr data[prev+length], 8)
-          if a != b: break
-          length += 8
-        while p+length < stop and data[p+length] == data[prev+length]: inc length
+      var prev = start+int(replaceSlot(h, p-start+1))-1
+      var length = 0
+      when deep:
+        let best = scratch.bestMatch(data, p, prev, depth)
+        prev = best.pos
+        length = best.length
+        if level >= 6 and length >= 4 and p+4 < stop:
+          let next = scratch.bestMatch(data, p+1, int(table[hash(word(data, p+1))])-1, depth)
+          if next.length > length+1:
+            inc p
+            continue
+      else:
+        if prev >= start and word(data, prev) == v:
+          length = matchLength(data, p, prev)
+      if length >= 4:
         let old = scratch.literals.len
         scratch.literals.setLen(old+p-anchor)
         if p > anchor: copyMem(addr scratch.literals[old], unsafeAddr data[anchor], p-anchor)
         scratch.sequences.add Sequence(literal: uint32(p-anchor), match: uint32(length), offset: uint32(p-prev))
+        when deep:
+          for position in p+1..min(p+length-1, stop-4):
+            discard replaceSlot(hash(word(data, position)), position+1)
         p += length
         anchor = p
         misses = 0
-        if p >= start+2 and p+2 <= stop: discard replaceSlot(hash(word(data, p-2)), p-start-1)
+        when not deep:
+          if p >= start+2 and p+2 <= stop: discard replaceSlot(hash(word(data, p-2)), p-start-1)
       else:
         inc misses
-        p += 1+(misses shr 7)
+        when deep: inc p
+        else: p += acceleration+(misses shr skipShift)
     var encoded: string
     if scratch.sequences.len > 0:
       let old = scratch.literals.len
@@ -201,11 +255,17 @@ proc encodeBlock(scratch: var EncodeScratch, data: openArray[char],
     else:
       result.addBlock(data.toOpenArray(start, stop-1), 0, last)
 
-proc compress*(data: openArray[char], checksum = true): string =
+proc encodeBlock(scratch: var EncodeScratch, data: openArray[char],
+                 output: var string, last, level: int) =
+  if level > 3: scratch.encodeBlock(data, output, last, level, true)
+  else: scratch.encodeBlock(data, output, last, level, false)
+
+proc compress*(data: openArray[char], checksum = true, level = DefaultCompressionLevel): string =
   ## Produce standard Zstandard frames. Memory is bounded by one 128 KiB
   ## block plus match scratch and the returned string; input is never copied.
-  ## ponytail: greedy block-local matches and raw literals favor speed/memory;
-  ## add lazy matching/adaptive entropy when compression ratio matters more.
+  ## Levels -131072..22 control effort; 0 selects the default (3).
+  ## Levels above 3 use up to 512 KiB of additional match-chain scratch.
+  let selectedLevel = compressionLevel(level)
   result = newStringOfCap(min(data.len, 256)+32)
   result.putLe(0xfd2fb528'u64, 4)
   let check = if checksum: 4 else: 0
@@ -228,15 +288,17 @@ proc compress*(data: openArray[char], checksum = true): string =
   var start = 0
   while true:
     let stop = start+min(data.len-start, BlockSize)
-    scratch.encodeBlock(data.toOpenArray(start, stop-1), result, ord(stop == data.len))
+    scratch.encodeBlock(data.toOpenArray(start, stop-1), result, ord(stop == data.len), selectedLevel)
     if stop == data.len: break
     start = stop
   if checksum: result.putLe(xxh64(data) and 0xffffffff'u64, 4)
 
-proc compress*(input, output: Stream, checksum = true) =
+proc compress*(input, output: Stream, checksum = true, level = DefaultCompressionLevel) =
   ## Encode one unknown-content-size frame, buffering at most one input block.
+  ## Levels -131072..22 control effort; 0 selects the default (3).
   ## Streams are neither closed nor flushed. I/O errors propagate to the caller.
   require(input != nil and output != nil and input != output, "distinct non-nil streams required")
+  let selectedLevel = compressionLevel(level)
   var header: string
   header.putLe(0xfd2fb528'u64, 4)
   header.add char(if checksum: 4 else: 0)
@@ -248,7 +310,7 @@ proc compress*(input, output: Stream, checksum = true) =
     let data = input.readChunk(BlockSize)
     if data.len == 0: break
     var encoded: string
-    scratch.encodeBlock(data, encoded, 0)
+    scratch.encodeBlock(data, encoded, 0, selectedLevel)
     if checksum: hash.update(data)
     output.write(encoded)
   var trailer: string

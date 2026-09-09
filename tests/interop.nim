@@ -70,5 +70,24 @@ try:
       output.close()
     doAssert readFile(decoded) == longSource, "history compaction window " & $windowLog
     inc cases
+  var levels = @[MinCompressionLevel, -10, -1, 0]
+  for level in 1..MaxCompressionLevel: levels.add level
+  let levelSource = rows[0..<200000] & pattern
+  writeFile(raw, levelSource)
+  for level in levels:
+    for check in [false, true]:
+      for streaming in [false, true]:
+        if streaming:
+          let input = newFileStream(raw, fmRead)
+          let output = newFileStream(packed, fmWrite)
+          try: compress(input, output, check, level)
+          finally:
+            input.close()
+            output.close()
+        else: writeFile(packed, compress(levelSource, check, level))
+        let run = execCmdEx(quoteShell(exe) & " -dqf " & quoteShell(packed) & " -o " & quoteShell(decoded))
+        doAssert run.exitCode == 0, run.output
+        doAssert readFile(decoded) == levelSource, "compression level " & $level
+        inc cases
   echo cases, " reference interoperability cases passed"
 finally: removeDir(dir)

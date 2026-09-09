@@ -1,3 +1,4 @@
+## Usage: bench [ROUNDS] [WORKLOAD] [encode|decode|both] [LEVEL]
 import std/[monotimes, times, strutils, random, strformat, os]
 import zimstd
 var rng = initRand(8878)
@@ -8,6 +9,7 @@ for i in 0..<22000: text.add "record=" & $i & " status=ok common words and repea
 let rounds = if paramCount() > 0: parseInt(paramStr(1)) else: 200
 let workload = if paramCount() > 1: paramStr(2) else: "all"
 let phase = if paramCount() > 2: paramStr(3) else: "both"
+let level = if paramCount() > 3: parseInt(paramStr(4)) else: DefaultCompressionLevel
 doAssert rounds > 0 and phase in ["both", "encode", "decode"]
 let vectors = currentSourcePath.parentDir.parentDir / "tests" / "vectors"
 for pair in [("repeated", repeat("abcdefgh12345678", 65536)), ("records", text), ("random", noise),
@@ -19,13 +21,13 @@ for pair in [("repeated", repeat("abcdefgh12345678", 65536)), ("records", text),
   let packed = case name
                of "huffman": readFile(vectors / "huffman-9.zst")
                of "binary": readFile(vectors / "binary-19.zst")
-               else: compress(source)
+               else: compress(source, level = level)
   let retained = getOccupiedMem()-beforeMemory
   doAssert decompress(packed) == source
   var sink = 0
   let start = getMonoTime()
   if phase != "decode":
-    for i in 0..<rounds: sink += compress(source).len
+    for i in 0..<rounds: sink += compress(source, level = level).len
   let mid = getMonoTime()
   if phase != "encode":
     for i in 0..<rounds: sink += decompress(packed).len

@@ -4,3 +4,4 @@ when sizeof(int) != 8:
   {.error: "ZimSTD requires a 64-bit Nim target".}
 import zimstd/[common, encode, decode]
 export ZstdError, compress, decompress
+export MinCompressionLevel, DefaultCompressionLevel, MaxCompressionLevel
