@@ -141,6 +141,39 @@ working memory over compression ratio; it does not aim to match libzstd's ratio.
 **Not implemented:** external dictionaries, compression levels, adaptive encoder
 entropy coding, or cross-block encoder matches.
 
+## Throughput
+
+Measured on an **Apple M3 Max (macOS, ARM64)** with **Nim 2.2.6**, release/ORC,
+checksums enabled, and bounds/range/overflow checks retained. Values are medians
+of **five runs, 200 iterations per workload per run**, measured September 9, 2026.
+
+| Workload | Input bytes | Encode (MiB/s) | Decode (MiB/s) |
+| --- | ---: | ---: | ---: |
+| Repeated 16-byte pattern | 1,048,576 | 2,435 | 5,782 |
+| Generated record text | 1,220,890 | 833 | 964 |
+| Uniform random bytes | 1,048,576 | 2,448 | 5,742 |
+| Weighted printable bytes | 90,000 | 2,511 | 185 |
+| Random bytes from a 16-value alphabet | 140,000 | 122 | 208 |
+
+Throughput counts **uncompressed bytes** (1 MiB = 1,048,576 bytes). These are
+single-threaded, in-memory calls, including output allocation, with no disk I/O.
+They do not measure the streaming API or compare ZimSTD against libzstd.
+
+The first three rows decode ZimSTD's own output. The weighted-printable and
+16-value binary rows decode stored reference frames produced by zstd 1.5.7 at
+levels 9 and 19, respectively; encoding always uses ZimSTD. This exercises entropy
+decoding that the current encoder does not itself emit. Uniform random input
+mostly uses raw blocks, so its high decode rate does not represent compressed
+entropy-coded data. These small synthetic workloads fit in cache; performance
+on larger files and other machines will vary.
+
+Reproduce with the checked-in [benchmark](benchmarks/bench.nim):
+
+```sh
+nim c -d:release --mm:orc --path:src benchmarks/bench.nim
+for run in 1 2 3 4 5; do ./benchmarks/bench 200; done
+```
+
 ## Development
 
 ```sh
