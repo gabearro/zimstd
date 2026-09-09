@@ -1,0 +1,11 @@
+/nimcache/
+/tests/test_zimstd
+/tests/interop
+/benchmarks/bench
+*.exe
+*.dSYM/
+/benchmarks/corpus
+/benchmarks/memory
+/tests/test_streaming
+/tests/test_zstd
+.DS_Store

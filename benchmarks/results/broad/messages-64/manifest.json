@@ -1,0 +1,26 @@
+[
+  {
+    "file": "dickens",
+    "input_bytes": 10192446,
+    "sha256": "b24c37886142e11d0ee687db6ab06f936207aa7f2ea1fd1d9a36763c7a507e6a",
+    "encoded_bytes": 12227792,
+    "encoded_sha256": "019b3eee400f505fdf62ba701bf5dfb002f5b9ecff5fb5f9db6956e77dc1362c",
+    "reference_sha256": "5801e11fdffc3814ccc820e60884f99baeed6cf0a0664368b399f1bb941dd370"
+  },
+  {
+    "file": "samba",
+    "input_bytes": 21606400,
+    "sha256": "93ba07bc44d8267789c1d911992f40b089ffa2140b4a160fac11ccae9a40e7b2",
+    "encoded_bytes": 23316263,
+    "encoded_sha256": "89a55d1910d7df87d4e4f553b29d2fd9b64f31a1cec1e55937f2adc100a4e727",
+    "reference_sha256": "09e2a04363f0fdbb3aab3f29f1dd7b702b857708f7de78caf6c0edfcd47a6654"
+  },
+  {
+    "file": "sao",
+    "input_bytes": 7251944,
+    "sha256": "c2d0ea2cc59d4c21b7fe43a71499342a00cbe530a1d5548770e91ecd6214adcc",
+    "encoded_bytes": 8724853,
+    "encoded_sha256": "868d3f0c4d800a86a8cece2713affab1b84517fb8d84f59c9b7992e36eb49959",
+    "reference_sha256": "6d5fe3dd2203fd39cf72a1049156806165e9e6eb6e55a57ab98af6af989a29b8"
+  }
+]

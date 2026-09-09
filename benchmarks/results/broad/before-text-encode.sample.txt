@@ -1,0 +1,321 @@
+Analysis of sampling corpus (pid 73909) every 1 millisecond
+Process:         corpus [73909]
+Path:            /private/tmp/*/corpus
+Load Address:    0x100954000
+Identifier:      corpus
+Version:         ???
+Code Type:       ARM64
+Parent Process:  Python [73908]
+Target Type:     live task
+
+Date/Time:       2026-09-09 10:58:30.210 +0100
+Launch Time:     2026-09-09 10:58:30.173 +0100
+OS Version:      macOS 27.0 (26A5425a)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+
+Physical footprint:         2816K
+Physical footprint (peak):  2816K
+Idle exit:                  untracked
+----
+
+Call graph:
+    72 Thread_16168090: Main Thread
+    + 64 _dyld_start  (in dyld) + 0  [0x100c74bf0]
+    + 5 start  (in dyld) + 6596  [0x188703e2c]
+    + ! 5 dyld4::start(dyld4::KernelArgs*, void*, void*, unsigned long long)::$_1::operator()() const  (in dyld) + 320  [0x188704a8c]
+    + !   4 dyld4::prepare(dyld4::APIs&, mach_o::UnsafeHeader const*)  (in dyld) + 4512  [0x188705c48]
+    + !   : 4 dyld4::RuntimeState::notifyDebuggerLoad(std::span<dyld4::Loader const*, 18446744073709551615ul> const&)  (in dyld) + 588  [0x188716530]
+    + !   :   4 dyld4::ExternallyViewableState::addImages(lsl::Allocator&, lsl::Allocator&, std::span<dyld4::ExternallyViewableState::ImageInfo, 18446744073709551615ul> const&)  (in dyld) + 1284  [0x188721fa4]
+    + !   :     4 dyld4::ExternallyViewableState::triggerNotifications(dyld_image_mode, unsigned int, dyld_image_info const*)  (in dyld) + 304  [0x1887217ac]
+    + !   :       4 dyld4::RemoteNotificationResponder::blockOnSynchronousEvent(unsigned int)  (in dyld) + 48  [0x1887462a4]
+    + !   :         4 dyld4::RemoteNotificationResponder::sendMessage(int, unsigned int, mach_msg_header_t*)  (in dyld) + 244  [0x188745eec]
+    + !   :           4 mach_msg_overwrite  (in dyld) + 244  [0x1887527d8]
+    + !   :             4 mach_msg2_internal  (in dyld) + 76  [0x188752630]
+    + !   :               4 mach_msg2_trap  (in dyld) + 8  [0x1886d372c]
+    + !   1 dyld4::prepare(dyld4::APIs&, mach_o::UnsafeHeader const*)  (in dyld) + 2624  [0x1887054e8]
+    + !     1 dyld4::Loader::adjustFunctionVariantsInDyldCache(dyld4::RuntimeState&)  (in dyld) + 184  [0x188733124]
+    + !       1 DyldSharedCache::forEachFunctionVariantPatchLocation(void (void const*, mach_o::PointerMetaData, mach_o::FunctionVariants const&, mach_o::UnsafeHeader const*, int, bool&) block_pointer) const  (in dyld) + 208  [0x1886ded6c]
+    + !         1 invocation function for block in dyld4::Loader::adjustFunctionVariantsInDyldCache(dyld4::RuntimeState&)  (in dyld) + 288  [0x188733278]
+    + !           1 dyld4::ProcessConfig::DyldCache::makeDataConstWritable(dyld4::ProcessConfig::Logging const&, dyld4::SyscallDelegate const&, bool) const  (in dyld) + 124  [0x18870a1c4]
+    + !             1 DyldSharedCache::forEachCache(void (DyldSharedCache const*, bool&) block_pointer) const  (in dyld) + 168  [0x1886dceb0]
+    + !               1 invocation function for block in dyld4::ProcessConfig::DyldCache::makeDataConstWritable(dyld4::ProcessConfig::Logging const&, dyld4::SyscallDelegate const&, bool) const  (in dyld) + 124  [0x18870a9bc]
+    + !                 1 DyldSharedCache::forEachRegion(void (void const*, unsigned long long, unsigned long long, unsigned int, unsigned int, unsigned long long, unsigned long long, bool&) block_pointer) const  (in dyld) + 276  [0x1886dcdf0]
+    + !                   1 invocation function for block in dyld4::ProcessConfig::DyldCache::makeDataConstWritable(dyld4::ProcessConfig::Logging const&, dyld4::SyscallDelegate const&, bool) const  (in dyld) + 148  [0x18870aa5c]
+    + !                     1 vm_protect  (in dyld) + 52  [0x1886d7670]
+    + !                       1 _kernelrpc_mach_vm_protect_trap  (in dyld) + 8  [0x1886d35b8]
+    + 1 start  (in dyld) + 1592  [0x100ca0aa0]
+    + ! 1 dyld4::SyscallDelegate::hasExistingDyldCache(unsigned long long&, FileIdTuple&) const  (in dyld) + 32  [0x100c9ea98]
+    + !   1 __shared_region_check_np  (in dyld) + 8  [0x100c76450]
+    + 1 start  (in dyld) + 6112  [0x100ca1c48]
+    + ! 1 dyld4::ExternallyViewableState::createMinimalInfo(lsl::Allocator&, unsigned long long, char const*, unsigned long long, char const*, DyldSharedCache const*)  (in dyld) + 1532  [0x100cbef18]
+    + !   1 dyld4::ExternallyViewableState::triggerNotifications(dyld_image_mode, unsigned int, dyld_image_info const*)  (in dyld) + 304  [0x100cbf7ac]
+    + !     1 dyld4::RemoteNotificationResponder::blockOnSynchronousEvent(unsigned int)  (in dyld) + 48  [0x100ce42a4]
+    + !       1 dyld4::RemoteNotificationResponder::sendMessage(int, unsigned int, mach_msg_header_t*)  (in dyld) + 244  [0x100ce3eec]
+    + !         1 mach_msg_overwrite  (in dyld) + 244  [0x100cf07d8]
+    + !           1 mach_msg2_internal  (in dyld) + 76  [0x100cf0630]
+    + !             1 mach_msg2_trap  (in dyld) + 8  [0x100c7172c]
+    + 1 start  (in dyld) + 2560  [0x188702e68]
+    +   1 dyld4::ExternallyViewableState::createMinimalInfo(lsl::Allocator&, unsigned long long, char const*, unsigned long long, char const*, DyldSharedCache const*)  (in dyld) + 1532  [0x188720f18]
+    +     1 dyld4::ExternallyViewableState::triggerNotifications(dyld_image_mode, unsigned int, dyld_image_info const*)  (in dyld) + 304  [0x1887217ac]
+    +       1 dyld4::RemoteNotificationResponder::blockOnSynchronousEvent(unsigned int)  (in dyld) + 48  [0x1887462a4]
+    +         1 dyld4::RemoteNotificationResponder::sendMessage(int, unsigned int, mach_msg_header_t*)  (in dyld) + 244  [0x188745eec]
+    +           1 mach_msg_overwrite  (in dyld) + 244  [0x1887527d8]
+    +             1 mach_msg2_internal  (in dyld) + 76  [0x188752630]
+    +               1 mach_msg2_trap  (in dyld) + 8  [0x1886d372c]
+    4099 Thread_16168090   DispatchQueue_1: com.apple.main-thread  (serial)
+      4098 start  (in dyld) + 6688  [0x188703e88]
+      ! 4098 main  (in corpus) + 40  [0x100966a58]  strs_v2.nim:161
+      !   4093 NimMainModule  (in corpus) + 1992  [0x100966330]  corpus.nim:31
+      !   : 1916 encode::compress(openArray<char>, bool)  (in corpus) + 3736  [0x1009625d8]  encode.nim:203
+      !   : | 389 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1432  [0x1009610e8]  encode.nim:102
+      !   : | + 142 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 104,140,...  [0x100960a94,0x100960ab8,...]  encode.nim:20
+      !   : | + 81 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 276  [0x100960b40]  encode.nim:25
+      !   : | + 44 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 28,32  [0x100960a48,0x100960a4c]  encode.nim:13
+      !   : | + 34 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 140  [0x100960ab8]  encode.nim:18
+      !   : | + ! 17 setLengthStrV2  (in corpus) + 8,0  [0x10095b304,0x10095b2fc]  strs_v2.nim:143
+      !   : | + ! 12 setLengthStrV2  (in corpus) + 644  [0x10095b580]  strs_v2.nim:57
+      !   : | + ! : 6 system::reallocShared0Impl(pointer, range09223372036854775807, range09223372036854775807)  (in corpus) + 156  [0x10095b2e4]  alloc.nim:1284
+      !   : | + ! : | 5 _platform_memset  (in libsystem_platform.dylib) + 140  [0x188ae3b1c]
+      !   : | + ! : | 1 __bzero  (in libsystem_platform.dylib) + 68  [0x188ae3a74]
+      !   : | + ! : 5 system::reallocShared0Impl(pointer, range09223372036854775807, range09223372036854775807)  (in corpus) + 116  [0x10095b2bc]  alloc.nim:1284
+      !   : | + ! : | 5 _platform_memmove  (in libsystem_platform.dylib) + 88  [0x188ae3db8]
+      !   : | + ! : 1 system::reallocShared0Impl(pointer, range09223372036854775807, range09223372036854775807)  (in corpus) + 48  [0x10095b278]  alloc.nim:1284
+      !   : | + ! :   1 _tlv_get_addr  (in libdyld.dylib) + 20  [0x1886b2e5c]
+      !   : | + ! 5 setLengthStrV2  (in corpus) + 28  [0x10095b318]  strs_v2.nim:27
+      !   : | + 25 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 68,36  [0x100960a70,0x100960a50]  encode.nim:14
+      !   : | + 19 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 36  [0x100960a50]  encode.nim:13
+      !   : | + ! 19 _tlv_get_addr  (in libdyld.dylib) + 20,12  [0x1886b2e5c,0x1886b2e54]
+      !   : | + 17 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 92  [0x100960a88]  encode.nim:15
+      !   : | + 12 setLengthStrV2  (in corpus) + 536  [0x10095b514]  strs_v2.nim:168
+      !   : | + 8 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 196  [0x100960af0]  encode.nim:22
+      !   : | + 5 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 168  [0x100960ad4]  encode.nim:21
+      !   : | + 2 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 120  [0x100960aa4]  encode.nim:18
+      !   : | 299 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1164  [0x100960fdc]  encode.nim:97
+      !   : | + 78 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 104,140,...  [0x100960a94,0x100960ab8,...]  encode.nim:20
+      !   : | + 68 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 28,8,...  [0x100960a48,0x100960a34,...]  encode.nim:13
+      !   : | + 52 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 276  [0x100960b40]  encode.nim:25
+      !   : | + 31 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 36  [0x100960a50]  encode.nim:13
+      !   : | + ! 31 _tlv_get_addr  (in libdyld.dylib) + 20,28,...  [0x1886b2e5c,0x1886b2e64,...]
+      !   : | + 27 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 68,36  [0x100960a70,0x100960a50]  encode.nim:14
+      !   : | + 15 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 140  [0x100960ab8]  encode.nim:18
+      !   : | + ! 3 setLengthStrV2  (in corpus) + 8  [0x10095b304]  strs_v2.nim:143
+      !   : | + ! 3 setLengthStrV2  (in corpus) + 20  [0x10095b310]  strs_v2.nim:26
+      !   : | + ! 3 setLengthStrV2  (in corpus) + 644  [0x10095b580]  strs_v2.nim:57
+      !   : | + ! : 2 system::reallocShared0Impl(pointer, range09223372036854775807, range09223372036854775807)  (in corpus) + 116  [0x10095b2bc]  alloc.nim:1284
+      !   : | + ! : | 2 _platform_memmove  (in libsystem_platform.dylib) + 180  [0x188ae3e14]
+      !   : | + ! : 1 system::reallocShared0Impl(pointer, range09223372036854775807, range09223372036854775807)  (in corpus) + 156  [0x10095b2e4]  alloc.nim:1284
+      !   : | + ! :   1 _platform_memset  (in libsystem_platform.dylib) + 140  [0x188ae3b1c]
+      !   : | + ! 2 setLengthStrV2  (in corpus) + 36  [0x10095b320]  strs_v2.nim:159
+      !   : | + ! 2 setLengthStrV2  (in corpus) + 28  [0x10095b318]  strs_v2.nim:27
+      !   : | + ! 2 setLengthStrV2  (in corpus) + 32  [0x10095b31c]  strs_v2.nim:28
+      !   : | + 9 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 92  [0x100960a88]  encode.nim:15
+      !   : | + 6 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 100,96  [0x100960a90,0x100960a8c]  encode.nim:19
+      !   : | + 5 setLengthStrV2  (in corpus) + 536,540  [0x10095b514,0x10095b518]  strs_v2.nim:168
+      !   : | + 3 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 120  [0x100960aa4]  encode.nim:18
+      !   : | + 3 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 196,184  [0x100960af0,0x100960ae4]  encode.nim:22
+      !   : | + 2 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 168  [0x100960ad4]  encode.nim:21
+      !   : | 292 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1216  [0x100961010]  encode.nim:98
+      !   : | + 99 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 104,148,...  [0x100960a94,0x100960ac0,...]  encode.nim:20
+      !   : | + 42 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 276  [0x100960b40]  encode.nim:25
+      !   : | + 40 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 28  [0x100960a48]  encode.nim:13
+      !   : | + 38 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 36  [0x100960a50]  encode.nim:13
+      !   : | + ! 38 _tlv_get_addr  (in libdyld.dylib) + 20,12,...  [0x1886b2e5c,0x1886b2e54,...]
+      !   : | + 33 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 68,36  [0x100960a70,0x100960a50]  encode.nim:14
+      !   : | + 19 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 92,84  [0x100960a88,0x100960a80]  encode.nim:15
+      !   : | + 12 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 140  [0x100960ab8]  encode.nim:18
+      !   : | + ! 6 setLengthStrV2  (in corpus) + 8  [0x10095b304]  strs_v2.nim:143
+      !   : | + ! 4 setLengthStrV2  (in corpus) + 28  [0x10095b318]  strs_v2.nim:27
+      !   : | + ! 1 setLengthStrV2  (in corpus) + 36  [0x10095b320]  strs_v2.nim:159
+      !   : | + ! 1 setLengthStrV2  (in corpus) + 20  [0x10095b310]  strs_v2.nim:26
+      !   : | + 5 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 196,184  [0x100960af0,0x100960ae4]  encode.nim:22
+      !   : | + 2 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 168  [0x100960ad4]  encode.nim:21
+      !   : | + 2 setLengthStrV2  (in corpus) + 536  [0x10095b514]  strs_v2.nim:168
+      !   : | 219 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1268  [0x100961044]  encode.nim:99
+      !   : | + 51 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 104,148,...  [0x100960a94,0x100960ac0,...]  encode.nim:20
+      !   : | + 42 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 28,32  [0x100960a48,0x100960a4c]  encode.nim:13
+      !   : | + 35 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 276  [0x100960b40]  encode.nim:25
+      !   : | + 32 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 68,36  [0x100960a70,0x100960a50]  encode.nim:14
+      !   : | + 30 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 36  [0x100960a50]  encode.nim:13
+      !   : | + ! 30 _tlv_get_addr  (in libdyld.dylib) + 20,12,...  [0x1886b2e5c,0x1886b2e54,...]
+      !   : | + 14 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 92,76,...  [0x100960a88,0x100960a78,...]  encode.nim:15
+      !   : | + 9 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 140  [0x100960ab8]  encode.nim:18
+      !   : | + ! 6 setLengthStrV2  (in corpus) + 8  [0x10095b304]  strs_v2.nim:143
+      !   : | + ! 3 setLengthStrV2  (in corpus) + 28  [0x10095b318]  strs_v2.nim:27
+      !   : | + 3 setLengthStrV2  (in corpus) + 536  [0x10095b514]  strs_v2.nim:168
+      !   : | + 2 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 184,196  [0x100960ae4,0x100960af0]  encode.nim:22
+      !   : | + 1 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 44  [0x100960a58]  encode.nim:0
+      !   : | 140 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 284,288  [0x100960b48,0x100960b4c]  encode.nim:25
+      !   : | 119 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1396  [0x1009610c4]  encode.nim:101
+      !   : | + 55 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 28,32  [0x100960a48,0x100960a4c]  encode.nim:13
+      !   : | + 32 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 68,36  [0x100960a70,0x100960a50]  encode.nim:14
+      !   : | + 22 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 36  [0x100960a50]  encode.nim:13
+      !   : | + ! 22 _tlv_get_addr  (in libdyld.dylib) + 20,12  [0x1886b2e5c,0x1886b2e54]
+      !   : | + 10 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 92,72  [0x100960a88,0x100960a74]  encode.nim:15
+      !   : | 115 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1336  [0x100961088]  encode.nim:100
+      !   : | + 43 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 68,36  [0x100960a70,0x100960a50]  encode.nim:14
+      !   : | + 33 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 36  [0x100960a50]  encode.nim:13
+      !   : | + ! 33 _tlv_get_addr  (in libdyld.dylib) + 12,20  [0x1886b2e54,0x1886b2e5c]
+      !   : | + 27 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 28  [0x100960a48]  encode.nim:13
+      !   : | + 12 encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 92,84  [0x100960a88,0x100960a80]  encode.nim:15
+      !   : | 106 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 768,1012,...  [0x100960e50,0x100960f44,...]  encode.nim:84
+      !   : | 56 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1444,888,...  [0x1009610f4,0x100960ec8,...]  encode.nim:0
+      !   : | 42 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1272,1228,...  [0x100961048,0x10096101c,...]  encode.nim:99
+      !   : | 32 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1176,1220  [0x100960fe8,0x100961014]  encode.nim:98
+      !   : | 26 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1356,1340  [0x10096109c,0x10096108c]  encode.nim:101
+      !   : | 25 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1296,1280  [0x100961060,0x100961050]  encode.nim:100
+      !   : | 14 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1436  [0x1009610ec]  encode.nim:103
+      !   : | 13 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1400  [0x1009610c8]  encode.nim:102
+      !   : | 12 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1496,1508  [0x100961128,0x100961134]  encode.nim:91
+      !   : | 9 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1448,1460,...  [0x1009610f8,0x100961104,...]  iterators_1.nim:39
+      !   : | 6 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1168,1164  [0x100960fe0,0x100960fdc]  encode.nim:97
+      !   : | 2 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 200  [0x100960c18]  encode.nim:58
+      !   : |   2 prepareAdd  (in corpus) + 408  [0x10095acac]  strs_v2.nim:51
+      !   : |     1 system::reallocSharedImpl(pointer, range09223372036854775807)  (in corpus) + 108  [0x10095853c]  alloc.nim:1276
+      !   : |     ! 1 _platform_memmove  (in libsystem_platform.dylib) + 180  [0x188ae3e14]
+      !   : |     1 system::reallocSharedImpl(pointer, range09223372036854775807)  (in corpus) + 132  [0x100958554]  alloc.nim:1276
+      !   : |       1 system::freeBigChunk(var<system::MemRegion>, ptr<system::BigChunk>)  (in corpus) + 1380  [0x1009579b4]  alloc.nim:666
+      !   : 328 encode::compress(openArray<char>, bool)  (in corpus) + 2692,2880,...  [0x1009621c4,0x100962280,...]  encode.nim:188
+      !   : 202 encode::compress(openArray<char>, bool)  (in corpus) + 2192,2200,...  [0x100961fd0,0x100961fd8,...]  encode.nim:194
+      !   : 191 encode::compress(openArray<char>, bool)  (in corpus) + 2660,2712,...  [0x1009621a4,0x1009621d8,...]  encode.nim:186
+      !   : 176 encode::compress(openArray<char>, bool)  (in corpus) + 2624,2648,...  [0x100962180,0x100962198,...]  encode.nim:185
+      !   : 166 encode::compress(openArray<char>, bool)  (in corpus) + 2144,2164,...  [0x100961fa0,0x100961fb4,...]  encode.nim:175
+      !   : 151 encode::compress(openArray<char>, bool)  (in corpus) + 2136,2112,...  [0x100961f98,0x100961f80,...]  encode.nim:174
+      !   : 143 encode::compress(openArray<char>, bool)  (in corpus) + 3128,3048,...  [0x100962378,0x100962328,...]  encode.nim:195
+      !   : 133 encode::compress(openArray<char>, bool)  (in corpus) + 2048,2416,...  [0x100961f40,0x1009620b0,...]  encode.nim:0
+      !   : 129 encode::compress(openArray<char>, bool)  (in corpus) + 2932  [0x1009622b4]  encode.nim:188
+      !   : | 43 system::add(var<seq<encode::Sequence>>, sink<encode::Sequence>)  (in corpus) + 32  [0x10095c950]  seqs_v2.nim:156
+      !   : | 35 system::add(var<seq<encode::Sequence>>, sink<encode::Sequence>)  (in corpus) + 88  [0x10095c988]  seqs_v2.nim:158
+      !   : | + 34 prepareSeqAddUninit  (in corpus) + 456  [0x10095a3b8]  seqs_v2.nim:115
+      !   : | + ! 33 system::alignedRealloc(pointer, range09223372036854775807, range09223372036854775807, range09223372036854775807)  (in corpus) + 116  [0x10095a164]  memalloc.nim:364
+      !   : | + ! : 33 _platform_memmove  (in libsystem_platform.dylib) + 88,100,...  [0x188ae3db8,0x188ae3dc4,...]
+      !   : | + ! 1 system::alignedRealloc(pointer, range09223372036854775807, range09223372036854775807, range09223372036854775807)  (in corpus) + 68  [0x10095a134]  memalloc.nim:364
+      !   : | + !   1 system::rawAlloc(var<system::MemRegion>, int)  (in corpus) + 284  [0x100957dbc]  alloc.nim:948
+      !   : | + !     1 system::getBigChunk(var<system::MemRegion>, int)  (in corpus) + 520  [0x100957210]  alloc.nim:688
+      !   : | + 1 prepareSeqAddUninit  (in corpus) + 324  [0x10095a334]  seqs_v2.nim:115
+      !   : | 25 system::add(var<seq<encode::Sequence>>, sink<encode::Sequence>)  (in corpus) + 12,0  [0x10095c93c,0x10095c930]  seqs_v2.nim:147
+      !   : | 21 system::add(var<seq<encode::Sequence>>, sink<encode::Sequence>)  (in corpus) + 52,48,...  [0x10095c964,0x10095c960,...]  seqs_v2.nim:158
+      !   : | 5 system::add(var<seq<encode::Sequence>>, sink<encode::Sequence>)  (in corpus) + 64  [0x10095c970]  seqs_v2.nim:159
+      !   : 76 encode::compress(openArray<char>, bool)  (in corpus) + 4052  [0x100962714]  encode.nim:211
+      !   : | 20 xxhash::xxh64(openArray<char>)  (in corpus) + 548,448,...  [0x100960088,0x100960024,...]  xxhash.nim:21
+      !   : | 17 xxhash::xxh64(openArray<char>)  (in corpus) + 676,604,...  [0x100960108,0x1009600c0,...]  xxhash.nim:22
+      !   : | 17 xxhash::xxh64(openArray<char>)  (in corpus) + 776,852,...  [0x10096016c,0x1009601b8,...]  xxhash.nim:23
+      !   : | 11 xxhash::xxh64(openArray<char>)  (in corpus) + 284  [0x10095ff80]  xxhash.nim:0
+      !   : | 10 xxhash::xxh64(openArray<char>)  (in corpus) + 408,296  [0x10095fffc,0x10095ff8c]  xxhash.nim:20
+      !   : | 1 xxhash::xxh64(openArray<char>)  (in corpus) + 288  [0x10095ff84]  xxhash.nim:19
+      !   : 71 encode::compress(openArray<char>, bool)  (in corpus) + 2396,2332,...  [0x10096209c,0x10096205c,...]  encode.nim:179
+      !   : 70 encode::compress(openArray<char>, bool)  (in corpus) + 2268,2720,...  [0x10096201c,0x1009621e0,...]  integerops.nim:0
+      !   : 67 encode::compress(openArray<char>, bool)  (in corpus) + 2760  [0x100962208]  encode.nim:186
+      !   : | 32 setLengthStrV2  (in corpus) + 8  [0x10095b304]  strs_v2.nim:143
+      !   : | 25 setLengthStrV2  (in corpus) + 28  [0x10095b318]  strs_v2.nim:27
+      !   : | 7 setLengthStrV2  (in corpus) + 644  [0x10095b580]  strs_v2.nim:57
+      !   : | + 3 system::reallocShared0Impl(pointer, range09223372036854775807, range09223372036854775807)  (in corpus) + 116  [0x10095b2bc]  alloc.nim:1284
+      !   : | + ! 3 _platform_memmove  (in libsystem_platform.dylib) + 180  [0x188ae3e14]
+      !   : | + 2 system::reallocShared0Impl(pointer, range09223372036854775807, range09223372036854775807)  (in corpus) + 156  [0x10095b2e4]  alloc.nim:1284
+      !   : | + ! 2 _platform_memset  (in libsystem_platform.dylib) + 140  [0x188ae3b1c]
+      !   : | + 1 system::rawAlloc(var<system::MemRegion>, int)  (in corpus) + 688  [0x100957f50]  alloc.nim:959
+      !   : | + 1 system::reallocShared0Impl(pointer, range09223372036854775807, range09223372036854775807)  (in corpus) + 68  [0x10095b28c]  alloc.nim:1284
+      !   : | +   1 system::rawAlloc(var<system::MemRegion>, int)  (in corpus) + 312  [0x100957dd8]  alloc.nim:870
+      !   : | +     1 system::getBigChunk(var<system::MemRegion>, int)  (in corpus) + 480  [0x1009571e8]  alloc.nim:688
+      !   : | 3 setLengthStrV2  (in corpus) + 36  [0x10095b320]  strs_v2.nim:159
+      !   : 60 encode::compress(openArray<char>, bool)  (in corpus) + 2568,2572,...  [0x100962148,0x10096214c,...]  encode.nim:184
+      !   : 51 encode::compress(openArray<char>, bool)  (in corpus) + 2856  [0x100962268]  encode.nim:188
+      !   : | 48 _platform_memmove  (in libsystem_platform.dylib) + 452,460,...  [0x188ae3f24,0x188ae3f2c,...]
+      !   : | 3 DYLD-STUB$$memcpy  (in corpus) + 4  [0x100966bfc]
+      !   : 34 encode::compress(openArray<char>, bool)  (in corpus) + 2460,2436,...  [0x1009620dc,0x1009620c4,...]  encode.nim:181
+      !   : 33 setLengthStrV2  (in corpus) + 536  [0x10095b514]  strs_v2.nim:168
+      !   : 30 system::add(var<seq<encode::Sequence>>, sink<encode::Sequence>)  (in corpus) + 164  [0x10095c9d4]  seqs_v2.nim:165
+      !   : 29 encode::compress(openArray<char>, bool)  (in corpus) + 2988  [0x1009622ec]  encode.nim:193
+      !   : 16 encode::compress(openArray<char>, bool)  (in corpus) + 2292  [0x100962034]  encode.nim:187
+      !   : 9 encode::compress(openArray<char>, bool)  (in corpus) + 3880  [0x100962668]  encode.nim:0
+      !   : | 5 _platform_memmove  (in libsystem_platform.dylib) + 88  [0x188ae3db8]
+      !   : | 4 encode::addBlock(var<string>, openArray<char>, int, int)  (in corpus) + 92  [0x100961548]  encode.nim:120
+      !   : |   4 setLengthStrV2  (in corpus) + 644  [0x10095b580]  strs_v2.nim:57
+      !   : |     2 system::reallocShared0Impl(pointer, range09223372036854775807, range09223372036854775807)  (in corpus) + 156  [0x10095b2e4]  alloc.nim:1284
+      !   : |     ! 2 __bzero  (in libsystem_platform.dylib) + 68  [0x188ae3a74]
+      !   : |     1 system::reallocShared0Impl(pointer, range09223372036854775807, range09223372036854775807)  (in corpus) + 116  [0x10095b2bc]  alloc.nim:1284
+      !   : |     ! 1 _platform_memmove  (in libsystem_platform.dylib) + 100  [0x188ae3dc4]
+      !   : |     1 system::reallocShared0Impl(pointer, range09223372036854775807, range09223372036854775807)  (in corpus) + 140  [0x10095b2d4]  alloc.nim:1284
+      !   : |       1 system::rawDealloc(var<system::MemRegion>, pointer)  (in corpus) + 184  [0x100958228]  alloc.nim:983
+      !   : 8 encode::compress(openArray<char>, bool)  (in corpus) + 2484  [0x1009620f4]  encode.nim:183
+      !   : 1 encode::compress(openArray<char>, bool)  (in corpus) + 232  [0x100961828]  encode.nim:131
+      !   : | 1 prepareAdd  (in corpus) + 16  [0x10095ab24]  strs_v2.nim:67
+      !   : 1 encode::compress(openArray<char>, bool)  (in corpus) + 1952  [0x100961ee0]  encode.nim:165
+      !   : | 1 __bzero  (in libsystem_platform.dylib) + 68  [0x188ae3a74]
+      !   : 1 encode::compress(openArray<char>, bool)  (in corpus) + 3712  [0x1009625c0]  encode.nim:202
+      !   : | 1 prepareAdd  (in corpus) + 408  [0x10095acac]  strs_v2.nim:51
+      !   : |   1 system::reallocSharedImpl(pointer, range09223372036854775807)  (in corpus) + 108  [0x10095853c]  alloc.nim:1276
+      !   : |     1 DYLD-STUB$$memcpy  (in corpus) + 4  [0x100966bfc]
+      !   : 1 encode::compress(openArray<char>, bool)  (in corpus) + 3724  [0x1009625cc]  encode.nim:202
+      !   :   1 appendString  (in corpus) + 52  [0x1009628dc]  strs_v2.nim:116
+      !   :     1 _platform_memmove  (in libsystem_platform.dylib) + 204  [0x188ae3e2c]
+      !   2 NimMainModule  (in corpus) + 652  [0x100965df4]  corpus.nim:15
+      !   : 2 decode::decompress(openArray<char>, int, int)  (in corpus) + 1380  [0x100965774]  decode.nim:285
+      !   :   1 decode::compressedBlock(var<decode::Decoder>, openArray<char>, var<string>, int, int, int, int)  (in corpus) + 180  [0x1009646dc]  decode.nim:164
+      !   :   | 1 decode::readLiterals(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 1836  [0x1009642a4]  decode.nim:131
+      !   :   |   1 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 304  [0x100963a5c]  decode.nim:0
+      !   :   1 decode::compressedBlock(var<decode::Decoder>, openArray<char>, var<string>, int, int, int, int)  (in corpus) + 2040  [0x100964e20]  decode.nim:215
+      !   :     1 setLengthStrV2  (in corpus) + 28  [0x10095b318]  strs_v2.nim:27
+      !   2 NimMainModule  (in corpus) + 1012  [0x100965f5c]  corpus.nim:22
+      !   : 2 decode::decompress(openArray<char>, int, int)  (in corpus) + 1380  [0x100965774]  decode.nim:285
+      !   :   1 decode::compressedBlock(var<decode::Decoder>, openArray<char>, var<string>, int, int, int, int)  (in corpus) + 1120  [0x100964a88]  decode.nim:0
+      !   :   1 decode::compressedBlock(var<decode::Decoder>, openArray<char>, var<string>, int, int, int, int)  (in corpus) + 1368  [0x100964b80]  decode.nim:179
+      !   :     1 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 40  [0x10096360c]  common.nim:63
+      !   :       1 _tlv_get_addr  (in libdyld.dylib) + 20  [0x1886b2e5c]
+      !   1 NimMainModule  (in corpus) + 968  [0x100965f30]  corpus.nim:21
+      !     1 encode::compress(openArray<char>, bool)  (in corpus) + 3736  [0x1009625d8]  encode.nim:203
+      !       1 encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus) + 1496  [0x100961128]  encode.nim:91
+      1 start  (in dyld) + 6596  [0x188703e2c]
+        1 dyld4::start(dyld4::KernelArgs*, void*, void*, unsigned long long)::$_1::operator()() const  (in dyld) + 320  [0x188704a8c]
+          1 dyld4::prepare(dyld4::APIs&, mach_o::UnsafeHeader const*)  (in dyld) + 4728  [0x188705d20]
+            1 dyld4::APIs::runAllInitializersForMain()  (in dyld) + 100  [0x1886f8e5c]
+              1 dyld4::PrebuiltLoader::runInitializers(dyld4::RuntimeState&) const  (in dyld) + 44  [0x188738640]
+                1 dyld4::Loader::findAndRunAllInitializers(dyld4::RuntimeState&) const  (in dyld) + 680  [0x1887306b0]
+                  1 mach_o::Image::forEachInitializer(void (unsigned int) block_pointer) const  (in dyld) + 244  [0x188768fbc]
+                    1 mach_o::Header::forEachSection(void (mach_o::Header::SectionInfo const&, bool&) block_pointer) const  (in dyld) + 128  [0x1887630a0]
+                      1 mach_o::Header::forEachLoadCommand(void (mach_o::Header::LoadCommandInfo const&, bool&) block_pointer, mach_o::Error*) const  (in dyld) + 228  [0x18875f028]
+                        1 invocation function for block in mach_o::Header::forEachSection(void (mach_o::Header::SectionInfo const&, bool&) block_pointer) const  (in dyld) + 156  [0x188765998]
+                          1 mach_o::Header::parse_segment_command<true>(mach_o::Header::LoadCommandInfo const&, unsigned short, void (mach_o::Header::SegmentInfo const&, mach_o::Header::SectionInfo const&) block_pointer, mach_o::Error*) const  (in dyld) + 580  [0x18876052c]
+                            1 invocation function for block in mach_o::Image::forEachInitializer(void (unsigned int) block_pointer) const  (in dyld) + 84  [0x18876908c]
+                              1 invocation function for block in dyld4::Loader::findAndRunAllInitializers(dyld4::RuntimeState&) const::$_0::operator()() const  (in dyld) + 360  [0x1887357ec]
+                                1 libSystem_initializer  (in libSystem.B.dylib) + 244  [0x199681358]
+                                  1 libdispatch_init  (in libdispatch.dylib) + 480  [0x18894f3c4]
+                                    1 _os_object_init  (in libdispatch.dylib) + 24  [0x188919788]
+                                      1 _objc_init  (in libobjc.A.dylib) + 2212  [0x188651b34]
+                                        1 _dyld_objc_register_callbacks  (in libdyld.dylib) + 344  [0x1886b11e4]
+                                          1 dyld4::APIs::_dyld_objc_register_callbacks(dyld4::ObjCCallbacks const*)  (in dyld) + 128  [0x1886ee578]
+                                            1 dyld4::RuntimeState::setObjCNotifiers(dyld4::ReadOnlyCallback<void (*)(char const*, mach_header const*)>, dyld4::ReadOnlyCallback<void (*)(mach_header const*, void*, mach_header const*, void const*)>, dyld4::ReadOnlyCallback<void (*)(_dyld_objc_notify_mapped_info const*)>, dyld4::ReadOnlyCallback<void (*)(unsigned int, _dyld_objc_notify_mapped_info const*, void (unsigned int) block_pointer)>)  (in dyld) + 540  [0x188718174]
+                                              1 dyld4::RuntimeLocks::withLoadersReadLock(void () block_pointer)  (in dyld) + 84  [0x18870f050]
+                                                1 invocation function for block in dyld4::RuntimeState::setObjCNotifiers(dyld4::ReadOnlyCallback<void (*)(char const*, mach_header const*)>, dyld4::ReadOnlyCallback<void (*)(mach_header const*, void*, mach_header const*, void const*)>, dyld4::ReadOnlyCallback<void (*)(_dyld_objc_notify_mapped_info const*)>, dyld4::ReadOnlyCallback<void (*)(unsigned int, _dyld_objc_notify_mapped_info const*, void (unsigned int) block_pointer)>)::$_0::operator()() const  (in dyld) + 1156  [0x18871ec94]
+                                                  1 map_images  (in libobjc.A.dylib) + 112  [0x188651e20]
+                                                    1 map_images_nolock  (in libobjc.A.dylib) + 7640  [0x188653c88]
+                                                      1 realizeClassWithoutSwift(objc_class*, objc_class*)  (in libobjc.A.dylib) + 564  [0x1886555e0]
+                                                        1 remapClass(objc_class*)  (in libobjc.A.dylib) + 12  [0x188655068]
+
+Total number in stack (recursive counted multiple, when >=5):
+        9       _platform_memmove  (in libsystem_platform.dylib) + 0  [0x188ae3d60]
+        8       _tlv_get_addr  (in libdyld.dylib) + 0  [0x1886b2e48]
+        6       encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 0  [0x100960a2c]  encode.nim:13
+        6       encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 0  [0x100960a2c]  encode.nim:14
+        6       encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 0  [0x100960a2c]  encode.nim:15
+        6       encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 36  [0x100960a50]  encode.nim:13
+        6       setLengthStrV2  (in corpus) + 0  [0x10095b2fc]  strs_v2.nim:27
+        5       encode::write(var<encode::BitWriter>, int, int)  (in corpus) + 0  [0x100960a2c]  encode.nim:25
+        5       setLengthStrV2  (in corpus) + 0  [0x10095b2fc]  strs_v2.nim:143
+        5       setLengthStrV2  (in corpus) + 0  [0x10095b2fc]  strs_v2.nim:168
+
+Sort by top of stack, same collapsed (when >= 5):
+        encode::compress(openArray<char>, bool)  (in corpus)        1778
+        encode::write(var<encode::BitWriter>, int, int)  (in corpus)        1308
+        encode::encodeSequences(var<string>, seq<encode::Sequence>)  (in corpus)        342
+        _tlv_get_addr  (in libdyld.dylib)        175
+        setLengthStrV2  (in corpus)        171
+        system::add(var<seq<encode::Sequence>>, sink<encode::Sequence>)  (in corpus)        124
+        _platform_memmove  (in libsystem_platform.dylib)        99
+        xxhash::xxh64(openArray<char>)  (in corpus)        76
+        _dyld_start  (in dyld)        64
+        _platform_memset  (in libsystem_platform.dylib)        8
+        mach_msg2_trap  (in dyld)        6
+
+Binary images description not available
+

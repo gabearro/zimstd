@@ -1,0 +1,13 @@
+Apple clang version 21.0.0 (clang-2100.3.33.1)
+Target: arm64-apple-darwin27.0.0
+Thread model: posix
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+ProductName:		macOS
+ProductVersion:		27.0
+BuildVersion:		26A5425a
+Nim Compiler Version 2.2.6 [MacOSX: arm64]
+Compiled at 2026-02-15
+Copyright (c) 2006-2025 by Andreas Rumpf
+
+active boot switches: -d:release
+*** Zstandard CLI (64-bit) v1.5.7, by Yann Collet ***

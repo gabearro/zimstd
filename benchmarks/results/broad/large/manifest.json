@@ -1,0 +1,26 @@
+[
+  {
+    "file": "E.coli",
+    "input_bytes": 4638690,
+    "sha256": "9125dfd87315961ef4286f3856098069e050cc3a2abe65735fe43e69d1996f40",
+    "encoded_bytes": 2680563,
+    "encoded_sha256": "46af61f95bc72eac66c41f7722ec8188e4a4499adb85b32388b603f8e7249582",
+    "reference_sha256": "a0e8b45cc1ceb97ea24bd2d799fdb445f1701ca09ffa9039fc5fac1faeca7178"
+  },
+  {
+    "file": "bible.txt",
+    "input_bytes": 4047392,
+    "sha256": "4e0a7e8dff7d9c82dbded57305c0ca3cdd3c4ca014db27121782fe9710f4723f",
+    "encoded_bytes": 2077596,
+    "encoded_sha256": "65d7795dd7ed77a2248ee10c92f2fbe169ca167ac7f6b00c943d33cc39bf41ed",
+    "reference_sha256": "f3f3a9e6e2eb5dc6be15b21a148382ddaa2f367d4bd5c7d9fa6827d50d2bfa76"
+  },
+  {
+    "file": "world192.txt",
+    "input_bytes": 2473400,
+    "sha256": "1aebdc97d29904b25791da9aa32be90b69d7da6dc0ac9b95512ed27ed40d2112",
+    "encoded_bytes": 1191999,
+    "encoded_sha256": "2cec9ac609d330fd3bc0af4cd86a2f435d2f287c48cd85342b09e2f02e71a7ba",
+    "reference_sha256": "1ed7fd147237fd1014600150960752eac8980dba0ac8fac889153f4ff3ff00af"
+  }
+]

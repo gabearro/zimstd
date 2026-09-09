@@ -1,0 +1,415 @@
+Analysis of sampling corpus (pid 74606) every 1 millisecond
+Process:         corpus [74606]
+Path:            /Users/USER/Documents/*/corpus
+Load Address:    0x10431c000
+Identifier:      corpus
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  Python [74584]
+Target Type:     live task
+
+Date/Time:       2026-09-09 11:04:51.752 +0100
+Launch Time:     2026-09-09 11:04:51.706 +0100
+OS Version:      macOS 27.0 (26A5425a)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+
+Physical footprint:         9392K
+Physical footprint (peak):  9392K
+Idle exit:                  untracked
+----
+
+Call graph:
+    3875 Thread_16177226   DispatchQueue_1: com.apple.main-thread  (serial)
+      3875 start  (in dyld) + 6688  [0x188703e88]
+        3875 main  (in corpus) + 40  [0x10432f4f4]  strs_v2.nim:161
+          3875 NimMainModule  (in corpus) + 2452  [0x10432eeec]  corpus.nim:38
+            3753 decode::decompress(openArray<char>, int, int)  (in corpus) + 1380  [0x10432e164]  decode.nim:295
+            + 3367 decode::compressedBlock(var<decode::Decoder>, openArray<char>, var<string>, int, int, int, int)  (in corpus) + 260  [0x10432dbbc]  decode.nim:0
+            + ! 518 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1900  [0x10432d608]  decode.nim:209
+            + ! : 108 _platform_memmove  (in libsystem_platform.dylib) + 436,460,...  [0x188ae3f14,0x188ae3f2c,...]
+            + ! : 94 decode::appendBytes(var<string>, openArray<char>, int, int, int)  (in corpus) + 48,12,...  [0x10432d958,0x10432d934,...]  decode.nim:153
+            + ! : 66 decode::appendBytes(var<string>, openArray<char>, int, int, int)  (in corpus) + 56  [0x10432d960]  decode.nim:153
+            + ! : | 66 _tlv_get_addr  (in libdyld.dylib) + 12,20  [0x1886b2e54,0x1886b2e5c]
+            + ! : 64 decode::appendBytes(var<string>, openArray<char>, int, int, int)  (in corpus) + 184  [0x10432d9e0]  decode.nim:157
+            + ! : | 19 setLengthStrV2  (in corpus) + 20  [0x104323558]  strs_v2.nim:26
+            + ! : | 17 setLengthStrV2  (in corpus) + 28  [0x104323560]  strs_v2.nim:27
+            + ! : | 14 setLengthStrV2  (in corpus) + 8,0  [0x10432354c,0x104323544]  strs_v2.nim:143
+            + ! : | 12 setLengthStrV2  (in corpus) + 36  [0x104323568]  strs_v2.nim:159
+            + ! : | 1 setLengthStrV2  (in corpus) + 52  [0x104323578]  strs_v2.nim:163
+            + ! : | 1 setLengthStrV2  (in corpus) + 512  [0x104323744]  strs_v2.nim:166
+            + ! : 49 DYLD-STUB$$memcpy  (in corpus) + 4,0  [0x10432f698,0x10432f694]
+            + ! : 37 decode::appendBytes(var<string>, openArray<char>, int, int, int)  (in corpus) + 140,200  [0x10432d9b4,0x10432d9f0]  decode.nim:0
+            + ! : 23 decode::appendBytes(var<string>, openArray<char>, int, int, int)  (in corpus) + 168,148  [0x10432d9d0,0x10432d9bc]  decode.nim:157
+            + ! : 19 decode::appendBytes(var<string>, openArray<char>, int, int, int)  (in corpus) + 64  [0x10432d968]  decode.nim:155
+            + ! : 19 decode::appendBytes(var<string>, openArray<char>, int, int, int)  (in corpus) + 184,208  [0x10432d9e0,0x10432d9f8]  decode.nim:158
+            + ! : 18 setLengthStrV2  (in corpus) + 536  [0x10432375c]  strs_v2.nim:168
+            + ! : 11 decode::appendBytes(var<string>, openArray<char>, int, int, int)  (in corpus) + 88  [0x10432d980]  decode.nim:156
+            + ! : 10 decode::appendBytes(var<string>, openArray<char>, int, int, int)  (in corpus) + 280  [0x10432da40]  decode.nim:162
+            + ! 382 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 2308  [0x10432d7a0]  decode.nim:220
+            + ! : 371 _platform_memmove  (in libsystem_platform.dylib) + 452,436,...  [0x188ae3f24,0x188ae3f14,...]
+            + ! : 11 DYLD-STUB$$memcpy  (in corpus) + 4  [0x10432f698]
+            + ! 243 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 2428,2168,...  [0x10432d818,0x10432d714,...]  decode.nim:0
+            + ! 226 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1292  [0x10432d3a8]  decode.nim:179
+            + ! : 99 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 32,0  [0x10432bf0c,0x10432beec]  common.nim:63
+            + ! : 52 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 40  [0x10432bf14]  common.nim:63
+            + ! : | 52 _tlv_get_addr  (in libdyld.dylib) + 12,20  [0x1886b2e54,0x1886b2e5c]
+            + ! : 35 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 132  [0x10432bf70]  common.nim:65
+            + ! : 21 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 56,44,...  [0x10432bf24,0x10432bf18,...]  common.nim:64
+            + ! : 10 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 68  [0x10432bf30]  common.nim:64
+            + ! : | 3 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 124,248  [0x10432c04c,0x10432c0c8]  common.nim:54
+            + ! : | 3 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 88,364  [0x10432c028,0x10432c13c]  common.nim:55
+            + ! : | 2 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 44  [0x10432bffc]  common.nim:50
+            + ! : | + 2 _tlv_get_addr  (in libdyld.dylib) + 20  [0x1886b2e5c]
+            + ! : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 16  [0x10432bfe0]  common.nim:50
+            + ! : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 376  [0x10432c148]  common.nim:56
+            + ! : 9 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 184  [0x10432bfa4]  common.nim:66
+            + ! 203 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 220,216  [0x10432bfc8,0x10432bfc4]  common.nim:67
+            + ! 199 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1748  [0x10432d570]  decode.nim:206
+            + ! : 69 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 32  [0x10432bf0c]  common.nim:63
+            + ! : 40 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 68  [0x10432bf30]  common.nim:64
+            + ! : | 12 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 36,0,...  [0x10432bff4,0x10432bfd0,...]  common.nim:50
+            + ! : | 9 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 124,324,...  [0x10432c04c,0x10432c114,...]  common.nim:54
+            + ! : | 6 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 376,96,...  [0x10432c148,0x10432c030,...]  common.nim:56
+            + ! : | 5 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 560  [0x10432c200]  common.nim:62
+            + ! : | 4 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 88,348  [0x10432c028,0x10432c12c]  common.nim:55
+            + ! : | 2 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 44  [0x10432bffc]  common.nim:50
+            + ! : | + 2 _tlv_get_addr  (in libdyld.dylib) + 20  [0x1886b2e5c]
+            + ! : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 228  [0x10432c0b4]  common.nim:0
+            + ! : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 44  [0x10432bffc]  common.nim:53
+            + ! : 35 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 56,76  [0x10432bf24,0x10432bf38]  common.nim:64
+            + ! : 29 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 40  [0x10432bf14]  common.nim:63
+            + ! : | 29 _tlv_get_addr  (in libdyld.dylib) + 20,24  [0x1886b2e5c,0x1886b2e60]
+            + ! : 24 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 144,132  [0x10432bf7c,0x10432bf70]  common.nim:65
+            + ! : 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 576  [0x10432c210]  common.nim:62
+            + ! : 1 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 184  [0x10432bfa4]  common.nim:66
+            + ! 161 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1356,1300,...  [0x10432d3e8,0x10432d3b0,...]  decode.nim:179
+            + ! 158 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1704  [0x10432d544]  decode.nim:205
+            + ! : 56 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 40  [0x10432bf14]  common.nim:63
+            + ! : | 56 _tlv_get_addr  (in libdyld.dylib) + 20,12  [0x1886b2e5c,0x1886b2e54]
+            + ! : 31 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 8,32  [0x10432bef4,0x10432bf0c]  common.nim:63
+            + ! : 27 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 56,44,...  [0x10432bf24,0x10432bf18,...]  common.nim:64
+            + ! : 20 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 132  [0x10432bf70]  common.nim:65
+            + ! : 11 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 68  [0x10432bf30]  common.nim:64
+            + ! : | 5 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 124,120,...  [0x10432c04c,0x10432c048,...]  common.nim:54
+            + ! : | 2 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 16,36  [0x10432bfe0,0x10432bff4]  common.nim:50
+            + ! : | 2 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 88,348  [0x10432c028,0x10432c12c]  common.nim:55
+            + ! : | 2 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 108,376  [0x10432c03c,0x10432c148]  common.nim:56
+            + ! : 10 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 184  [0x10432bfa4]  common.nim:66
+            + ! : 2 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 576  [0x10432c210]  common.nim:62
+            + ! : 1 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 212  [0x10432bfc0]  common.nim:67
+            + ! 155 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1792  [0x10432d59c]  decode.nim:207
+            + ! : 69 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 32  [0x10432bf0c]  common.nim:63
+            + ! : 41 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 132,144  [0x10432bf70,0x10432bf7c]  common.nim:65
+            + ! : 27 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 40  [0x10432bf14]  common.nim:63
+            + ! : | 27 _tlv_get_addr  (in libdyld.dylib) + 20  [0x1886b2e5c]
+            + ! : 8 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 68  [0x10432bf30]  common.nim:64
+            + ! : | 4 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 56,124  [0x10432c008,0x10432c04c]  common.nim:54
+            + ! : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 228  [0x10432c0b4]  common.nim:0
+            + ! : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 44  [0x10432bffc]  common.nim:50
+            + ! : | + 1 _tlv_get_addr  (in libdyld.dylib) + 20  [0x1886b2e5c]
+            + ! : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 16  [0x10432bfe0]  common.nim:50
+            + ! : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 348  [0x10432c12c]  common.nim:55
+            + ! : 8 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 56  [0x10432bf24]  common.nim:64
+            + ! : 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 568  [0x10432c208]  common.nim:62
+            + ! : 1 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 184  [0x10432bfa4]  common.nim:66
+            + ! 144 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 2228,2180,...  [0x10432d750,0x10432d720,...]  decode.nim:219
+            + ! 138 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 2112  [0x10432d6dc]  decode.nim:215
+            + ! : 70 setLengthStrV2  (in corpus) + 644  [0x1043237c8]  strs_v2.nim:57
+            + ! : | 53 system::reallocShared0Impl(pointer, range09223372036854775807, range09223372036854775807)  (in corpus) + 116  [0x104323504]  alloc.nim:1284
+            + ! : | + 53 _platform_memmove  (in libsystem_platform.dylib) + 88,100  [0x188ae3db8,0x188ae3dc4]
+            + ! : | 12 system::reallocShared0Impl(pointer, range09223372036854775807, range09223372036854775807)  (in corpus) + 156  [0x10432352c]  alloc.nim:1284
+            + ! : | + 12 __bzero  (in libsystem_platform.dylib) + 68,64  [0x188ae3a74,0x188ae3a70]
+            + ! : | 3 system::reallocShared0Impl(pointer, range09223372036854775807, range09223372036854775807)  (in corpus) + 68  [0x1043234d4]  alloc.nim:1284
+            + ! : | + 3 system::rawAlloc(var<system::MemRegion>, int)  (in corpus) + 284  [0x104320004]  alloc.nim:948
+            + ! : | +   2 system::getBigChunk(var<system::MemRegion>, int)  (in corpus) + 556  [0x10431f47c]  alloc.nim:690
+            + ! : | +   ! 1 system::splitChunk(var<system::MemRegion>, ptr<system::BigChunk>, int)  (in corpus) + 132  [0x10431f148]  alloc.nim:627
+            + ! : | +   ! 1 system::splitChunk(var<system::MemRegion>, ptr<system::BigChunk>, int)  (in corpus) + 252  [0x10431f1c0]  alloc.nim:628
+            + ! : | +   1 system::getBigChunk(var<system::MemRegion>, int)  (in corpus) + 0  [0x10431f250]  alloc.nim:668
+            + ! : | 2 system::reallocShared0Impl(pointer, range09223372036854775807, range09223372036854775807)  (in corpus) + 140  [0x10432351c]  alloc.nim:1284
+            + ! : |   1 system::freeBigChunk(var<system::MemRegion>, ptr<system::BigChunk>)  (in corpus) + 1000  [0x10431fa80]  alloc.nim:0
+            + ! : |   1 system::freeBigChunk(var<system::MemRegion>, ptr<system::BigChunk>)  (in corpus) + 1468  [0x10431fc54]  alloc.nim:666
+            + ! : 24 setLengthStrV2  (in corpus) + 8  [0x10432354c]  strs_v2.nim:143
+            + ! : 18 setLengthStrV2  (in corpus) + 36  [0x104323568]  strs_v2.nim:159
+            + ! : 13 setLengthStrV2  (in corpus) + 20  [0x104323558]  strs_v2.nim:26
+            + ! : 12 setLengthStrV2  (in corpus) + 28  [0x104323560]  strs_v2.nim:27
+            + ! : 1 setLengthStrV2  (in corpus) + 32  [0x104323564]  strs_v2.nim:28
+            + ! 132 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1356  [0x10432d3e8]  decode.nim:179
+            + ! : 56 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 32  [0x10432bf0c]  common.nim:63
+            + ! : 53 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 132,144  [0x10432bf70,0x10432bf7c]  common.nim:65
+            + ! : 23 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 40  [0x10432bf14]  common.nim:63
+            + ! :   23 _tlv_get_addr  (in libdyld.dylib) + 28,12,...  [0x1886b2e64,0x1886b2e54,...]
+            + ! 115 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1428  [0x10432d430]  decode.nim:179
+            + ! : 60 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 32,8  [0x10432bf0c,0x10432bef4]  common.nim:63
+            + ! : 29 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 132  [0x10432bf70]  common.nim:65
+            + ! : 26 common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 40  [0x10432bf14]  common.nim:63
+            + ! :   26 _tlv_get_addr  (in libdyld.dylib) + 20  [0x1886b2e5c]
+            + ! 88 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 2264,2280,...  [0x10432d774,0x10432d784,...]  decode.nim:220
+            + ! 71 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 2336  [0x10432d7bc]  decode.nim:221
+            + ! 62 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 2348,1816,...  [0x10432d7c8,0x10432d5b4,...]  integerops.nim:0
+            + ! 52 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1524,1508,...  [0x10432d490,0x10432d480,...]  decode.nim:193
+            + ! 36 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1708,1704  [0x10432d548,0x10432d544]  decode.nim:205
+            + ! 30 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1460  [0x10432d450]  decode.nim:186
+            + ! 29 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 2036  [0x10432d690]  decode.nim:213
+            + ! 29 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 2076,2096  [0x10432d6b8,0x10432d6cc]  decode.nim:215
+            + ! 28 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1748  [0x10432d570]  decode.nim:206
+            + ! 28 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1792  [0x10432d59c]  decode.nim:207
+            + ! 28 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1924,1900  [0x10432d620,0x10432d608]  decode.nim:210
+            + ! 25 setLengthStrV2  (in corpus) + 536  [0x10432375c]  strs_v2.nim:168
+            + ! 23 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1948,1960  [0x10432d638,0x10432d644]  decode.nim:212
+            + ! 14 decode::appendBytes(var<string>, openArray<char>, int, int, int)  (in corpus) + 296  [0x10432da50]  decode.nim:162
+            + ! 12 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 536  [0x10432d0b4]  decode.nim:174
+            + ! : 10 common::readFse(openArray<char>, var<int>, int, int)  (in corpus) + 1100  [0x104327c88]  common.nim:151
+            + ! : | 3 common::buildFse(openArray<int>, int)  (in corpus) + 912  [0x104327790]  common.nim:27
+            + ! : | 3 common::buildFse(openArray<int>, int)  (in corpus) + 488,476  [0x1043275e8,0x1043275dc]  common.nim:91
+            + ! : | 2 common::buildFse(openArray<int>, int)  (in corpus) + 852,860  [0x104327754,0x10432775c]  common.nim:95
+            + ! : | 1 common::buildFse(openArray<int>, int)  (in corpus) + 904  [0x104327788]  common.nim:0
+            + ! : | 1 common::buildFse(openArray<int>, int)  (in corpus) + 876  [0x10432776c]  common.nim:98
+            + ! : 1 common::readFse(openArray<char>, var<int>, int, int)  (in corpus) + 572  [0x104327a78]  common.nim:135
+            + ! : 1 common::readFse(openArray<char>, var<int>, int, int)  (in corpus) + 284  [0x104327958]  common.nim:27
+            + ! :   1 _platform_memset  (in libsystem_platform.dylib) + 140  [0x188ae3b1c]
+            + ! 11 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1468  [0x10432d458]  decode.nim:189
+            + ! 10 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 608  [0x10432d0fc]  decode.nim:174
+            + ! : 9 common::readFse(openArray<char>, var<int>, int, int)  (in corpus) + 1100  [0x104327c88]  common.nim:151
+            + ! : | 2 common::buildFse(openArray<int>, int)  (in corpus) + 832  [0x104327740]  common.nim:102
+            + ! : | 2 common::buildFse(openArray<int>, int)  (in corpus) + 852  [0x104327754]  common.nim:95
+            + ! : | 1 common::buildFse(openArray<int>, int)  (in corpus) + 904  [0x104327788]  common.nim:0
+            + ! : | 1 common::buildFse(openArray<int>, int)  (in corpus) + 912  [0x104327790]  common.nim:27
+            + ! : | 1 common::buildFse(openArray<int>, int)  (in corpus) + 96  [0x104327460]  common.nim:88
+            + ! : | + 1 _platform_memset  (in libsystem_platform.dylib) + 140  [0x188ae3b1c]
+            + ! : | 1 common::buildFse(openArray<int>, int)  (in corpus) + 488  [0x1043275e8]  common.nim:91
+            + ! : | 1 common::buildFse(openArray<int>, int)  (in corpus) + 524  [0x10432760c]  iterators_1.nim:131
+            + ! : 1 common::readFse(openArray<char>, var<int>, int, int)  (in corpus) + 692  [0x104327af0]  common.nim:141
+            + ! 7 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 572  [0x10432d0d8]  decode.nim:174
+            + ! : 6 common::readFse(openArray<char>, var<int>, int, int)  (in corpus) + 1100  [0x104327c88]  common.nim:151
+            + ! : | 1 common::buildFse(openArray<int>, int)  (in corpus) + 512  [0x104327600]  common.nim:0
+            + ! : | 1 common::buildFse(openArray<int>, int)  (in corpus) + 840  [0x104327748]  common.nim:100
+            + ! : | 1 common::buildFse(openArray<int>, int)  (in corpus) + 912  [0x104327790]  common.nim:27
+            + ! : | 1 common::buildFse(openArray<int>, int)  (in corpus) + 164  [0x1043274a4]  common.nim:85
+            + ! : | 1 common::buildFse(openArray<int>, int)  (in corpus) + 852  [0x104327754]  common.nim:95
+            + ! : | 1 common::buildFse(openArray<int>, int)  (in corpus) + 524  [0x10432760c]  iterators_1.nim:131
+            + ! : 1 common::readFse(openArray<char>, var<int>, int, int)  (in corpus) + 572  [0x104327a78]  common.nim:135
+            + ! 5 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1504  [0x10432d47c]  decode.nim:192
+            + ! 3 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1940  [0x10432d630]  decode.nim:211
+            + ! 1 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 1672  [0x10432d524]  decode.nim:204
+            + ! 1 decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus) + 2432  [0x10432d81c]  decode.nim:217
+            + 386 decode::compressedBlock(var<decode::Decoder>, openArray<char>, var<string>, int, int, int, int)  (in corpus) + 100  [0x10432db1c]  decode.nim:228
+            +   102 decode::readLiterals(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 1712  [0x10432cb54]  decode.nim:132
+            +   : 22 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 236  [0x10432c328]  decode.nim:82
+            +   : 21 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 224  [0x10432c31c]  decode.nim:79
+            +   : | 9 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 56,124,...  [0x10432c008,0x10432c04c,...]  common.nim:54
+            +   : | 4 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 44  [0x10432bffc]  common.nim:50
+            +   : | + 4 _tlv_get_addr  (in libdyld.dylib) + 20  [0x1886b2e5c]
+            +   : | 4 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 96,376,...  [0x10432c030,0x10432c148,...]  common.nim:56
+            +   : | 2 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 560  [0x10432c200]  common.nim:62
+            +   : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 228  [0x10432c0b4]  common.nim:0
+            +   : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 364  [0x10432c13c]  common.nim:55
+            +   : 14 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 348,316,...  [0x10432c398,0x10432c378,...]  decode.nim:83
+            +   : 13 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 204,224  [0x10432c308,0x10432c31c]  decode.nim:79
+            +   : 13 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 176,420,...  [0x10432c2ec,0x10432c3e0,...]  decode.nim:86
+            +   : 9 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 192,196  [0x10432c2fc,0x10432c300]  decode.nim:78
+            +   : 6 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 404  [0x10432c3d0]  decode.nim:85
+            +   : 3 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 332  [0x10432c388]  decode.nim:0
+            +   : 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 576  [0x10432c210]  common.nim:62
+            +   96 decode::readLiterals(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 1896  [0x10432cc0c]  decode.nim:132
+            +   : 20 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 236  [0x10432c328]  decode.nim:82
+            +   : 18 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 348,296,...  [0x10432c398,0x10432c364,...]  decode.nim:83
+            +   : 18 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 176,420,...  [0x10432c2ec,0x10432c3e0,...]  decode.nim:86
+            +   : 15 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 224  [0x10432c31c]  decode.nim:79
+            +   : | 5 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 172,56,...  [0x10432c07c,0x10432c008,...]  common.nim:54
+            +   : | 3 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 348,364  [0x10432c12c,0x10432c13c]  common.nim:55
+            +   : | 3 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 108,376,...  [0x10432c03c,0x10432c148,...]  common.nim:56
+            +   : | 2 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 36,40  [0x10432bff4,0x10432bff8]  common.nim:50
+            +   : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 228  [0x10432c0b4]  common.nim:0
+            +   : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 44  [0x10432bffc]  common.nim:50
+            +   : |   1 _tlv_get_addr  (in libdyld.dylib) + 12  [0x1886b2e54]
+            +   : 11 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 204  [0x10432c308]  decode.nim:79
+            +   : 5 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 404,396  [0x10432c3d0,0x10432c3c8]  decode.nim:85
+            +   : 3 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 564,576  [0x10432c204,0x10432c210]  common.nim:62
+            +   : 3 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 332  [0x10432c388]  decode.nim:0
+            +   : 3 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 192  [0x10432c2fc]  decode.nim:78
+            +   83 decode::readLiterals(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 1384  [0x10432ca0c]  decode.nim:132
+            +   : 18 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 224  [0x10432c31c]  decode.nim:79
+            +   : | 6 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 96,108,...  [0x10432c030,0x10432c03c,...]  common.nim:56
+            +   : | 3 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 112,228  [0x10432c040,0x10432c0b4]  common.nim:0
+            +   : | 2 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 44  [0x10432bffc]  common.nim:50
+            +   : | + 2 _tlv_get_addr  (in libdyld.dylib) + 12,20  [0x1886b2e54,0x1886b2e5c]
+            +   : | 2 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 36  [0x10432bff4]  common.nim:50
+            +   : | 2 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 56,172  [0x10432c008,0x10432c07c]  common.nim:54
+            +   : | 2 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 560  [0x10432c200]  common.nim:62
+            +   : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 44  [0x10432bffc]  common.nim:53
+            +   : 17 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 428,420,...  [0x10432c3e8,0x10432c3e0,...]  decode.nim:86
+            +   : 12 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 204  [0x10432c308]  decode.nim:79
+            +   : 11 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 236  [0x10432c328]  decode.nim:82
+            +   : 9 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 348,316,...  [0x10432c398,0x10432c378,...]  decode.nim:83
+            +   : 8 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 404,396  [0x10432c3d0,0x10432c3c8]  decode.nim:85
+            +   : 4 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 192,196  [0x10432c2fc,0x10432c300]  decode.nim:78
+            +   : 3 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 332  [0x10432c388]  decode.nim:0
+            +   : 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 576  [0x10432c210]  common.nim:62
+            +   83 decode::readLiterals(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 1524  [0x10432ca98]  decode.nim:132
+            +   : 23 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 316,348,...  [0x10432c378,0x10432c398,...]  decode.nim:83
+            +   : 16 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 224  [0x10432c31c]  decode.nim:79
+            +   : | 6 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 248,56,...  [0x10432c0c8,0x10432c008,...]  common.nim:54
+            +   : | 3 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 560  [0x10432c200]  common.nim:62
+            +   : | 2 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 44  [0x10432bffc]  common.nim:50
+            +   : | + 2 _tlv_get_addr  (in libdyld.dylib) + 20  [0x1886b2e5c]
+            +   : | 2 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 96,392  [0x10432c030,0x10432c158]  common.nim:56
+            +   : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 112  [0x10432c040]  common.nim:0
+            +   : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 44  [0x10432bffc]  common.nim:53
+            +   : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 348  [0x10432c12c]  common.nim:55
+            +   : 15 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 236,232  [0x10432c328,0x10432c324]  decode.nim:82
+            +   : 13 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 428,440,...  [0x10432c3e8,0x10432c3f4,...]  decode.nim:86
+            +   : 9 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 204,224  [0x10432c308,0x10432c31c]  decode.nim:79
+            +   : 3 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 404  [0x10432c3d0]  decode.nim:85
+            +   : 2 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 332  [0x10432c388]  decode.nim:0
+            +   : 2 decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus) + 192  [0x10432c2fc]  decode.nim:78
+            +   18 decode::readLiterals(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 412  [0x10432c640]  decode.nim:118
+            +   : 5 decode::readHuff(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 280  [0x10432b300]  common.nim:27
+            +   : | 3 common::readFse(openArray<char>, var<int>, int, int)  (in corpus) + 1100  [0x104327c88]  common.nim:151
+            +   : | + 1 common::buildFse(openArray<int>, int)  (in corpus) + 164  [0x1043274a4]  common.nim:85
+            +   : | + 1 common::buildFse(openArray<int>, int)  (in corpus) + 456  [0x1043275c8]  common.nim:89
+            +   : | + 1 common::buildFse(openArray<int>, int)  (in corpus) + 860  [0x10432775c]  common.nim:95
+            +   : | 1 common::readFse(openArray<char>, var<int>, int, int)  (in corpus) + 780  [0x104327b48]  common.nim:143
+            +   : | 1 common::readFse(openArray<char>, var<int>, int, int)  (in corpus) + 812  [0x104327b68]  common.nim:148
+            +   : 4 decode::readHuff(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 2672,2684  [0x10432bc58,0x10432bc64]  iterators_1.nim:129
+            +   : 2 decode::readHuff(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 1308  [0x10432b704]  decode.nim:25
+            +   : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 44  [0x10432bffc]  common.nim:50
+            +   : | + 1 _tlv_get_addr  (in libdyld.dylib) + 12  [0x1886b2e54]
+            +   : | 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 12  [0x10432bfdc]  common.nim:50
+            +   : 1 common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 576  [0x10432c210]  common.nim:62
+            +   : 1 decode::readHuff(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 1452  [0x10432b794]  decode.nim:34
+            +   : 1 decode::readHuff(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 940  [0x10432b594]  decode.nim:45
+            +   : 1 decode::readHuff(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 1004  [0x10432b5d4]  decode.nim:48
+            +   : 1 decode::readHuff(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 2492  [0x10432bba4]  decode.nim:65
+            +   : 1 decode::readHuff(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 2592  [0x10432bc08]  decode.nim:70
+            +   : 1 decode::readHuff(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 928  [0x10432b588]  iterators_1.nim:131
+            +   3 decode::readLiterals(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 728  [0x10432c77c]  decode.nim:120
+            +   : 1 setLengthStrV2  (in corpus) + 380  [0x1043236c0]  strs_v2.nim:0
+            +   : | 1 _platform_memset  (in libsystem_platform.dylib) + 140  [0x188ae3b1c]
+            +   : 1 setLengthStrV2  (in corpus) + 360  [0x1043236ac]  strs_v2.nim:158
+            +   : 1 setLengthStrV2  (in corpus) + 236  [0x104323630]  strs_v2.nim:39
+            +   :   1 system::rawAlloc(var<system::MemRegion>, int)  (in corpus) + 284  [0x104320004]  alloc.nim:948
+            +   :     1 system::getBigChunk(var<system::MemRegion>, int)  (in corpus) + 396  [0x10431f3dc]  alloc.nim:688
+            +   1 decode::readLiterals(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus) + 1008  [0x10432c894]  decode.nim:125
+            +     1 common::readLe(openArray<char>, var<int>, int)  (in corpus) + 0  [0x10432bcf4]  common.nim:29
+            122 decode::decompress(openArray<char>, int, int)  (in corpus) + 2140  [0x10432e45c]  decode.nim:302
+              33 xxhash::xxh64(openArray<char>)  (in corpus) + 676,604,...  [0x104328348,0x104328300,...]  xxhash.nim:22
+              30 xxhash::xxh64(openArray<char>)  (in corpus) + 448,548,...  [0x104328264,0x1043282c8,...]  xxhash.nim:21
+              28 xxhash::xxh64(openArray<char>)  (in corpus) + 852,888,...  [0x1043283f8,0x10432841c,...]  xxhash.nim:23
+              19 xxhash::xxh64(openArray<char>)  (in corpus) + 408,296  [0x10432823c,0x1043281cc]  xxhash.nim:20
+              9 xxhash::xxh64(openArray<char>)  (in corpus) + 284  [0x1043281c0]  xxhash.nim:0
+              3 xxhash::xxh64(openArray<char>)  (in corpus) + 288  [0x1043281c4]  xxhash.nim:19
+
+Total number in stack (recursive counted multiple, when >=5):
+        15       _tlv_get_addr  (in libdyld.dylib) + 0  [0x1886b2e48]
+        11       common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 0  [0x10432bfd0]  common.nim:62
+        8       common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 0  [0x10432bfd0]  common.nim:54
+        8       common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 44  [0x10432bffc]  common.nim:50
+        7       common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 0  [0x10432bfd0]  common.nim:50
+        7       common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 0  [0x10432bfd0]  common.nim:55
+        7       common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 0  [0x10432bfd0]  common.nim:56
+        6       common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 0  [0x10432bfd0]  common.nim:0
+        6       common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 0  [0x10432beec]  common.nim:63
+        6       common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 0  [0x10432beec]  common.nim:65
+        6       common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus) + 40  [0x10432bf14]  common.nim:63
+
+Sort by top of stack, same collapsed (when >= 5):
+        decode::execSequences(var<decode::Decoder>, openArray<char>, openArray<char>, int, var<string>, int, int, int, int)  (in corpus)        1073
+        common::take(var<common::ReverseBits>, openArray<char>, int)  (in corpus)        902
+        _platform_memmove  (in libsystem_platform.dylib)        532
+        _tlv_get_addr  (in libdyld.dylib)        294
+        decode::huffStream(var<decode::Decoder>, openArray<char>, int, int, int, int)  (in corpus)        289
+        decode::appendBytes(var<string>, openArray<char>, int, int, int)  (in corpus)        227
+        setLengthStrV2  (in corpus)        176
+        common::fetch(var<common::ReverseBits>, openArray<char>, int)  (in corpus)        136
+        xxhash::xxh64(openArray<char>)  (in corpus)        122
+        DYLD-STUB$$memcpy  (in corpus)        60
+        common::buildFse(openArray<int>, int)  (in corpus)        27
+        __bzero  (in libsystem_platform.dylib)        12
+        decode::readHuff(var<decode::Decoder>, openArray<char>, var<int>)  (in corpus)        10
+        common::readFse(openArray<char>, var<int>, int, int)  (in corpus)        5
+
+Binary Images:
+       0x10431c000 -        0x104335ce3 +corpus (0) <F8DE546C-7C07-3183-A212-DFA5CD5220C1> /Users/*/Documents/*/corpus
+       0x188650000 -        0x18869f527  libobjc.A.dylib (973.1) <220ABA7C-1B27-3461-AD64-F0C02DA55A5B> /usr/lib/libobjc.A.dylib
+       0x1886a0000 -        0x1886aa23f  libsharedcache.dylib (0) <10B20858-73AC-3AB6-AEE8-B6E7243D386E> /usr/lib/libsharedcache.dylib
+       0x1886ab000 -        0x1886d1ceb  libdyld.dylib (27062) <2DE7C10A-5A74-3F3F-93B6-5ABA1D64F9B7> /usr/lib/system/libdyld.dylib
+       0x1886d2000 -        0x18879166f  dyld (1.0.0 - 27062) <B6C0F697-046B-3606-96F7-042154B70AB9> /usr/lib/dyld
+       0x188792000 -        0x18879501f  libsystem_blocks.dylib (98.1) <426419BE-A433-3D7A-AE2A-39F3519571B4> /usr/lib/system/libsystem_blocks.dylib
+       0x188796000 -        0x1887eb07f  libxpc.dylib (3298.1.1) <4173B9B6-71E5-3A85-A1C8-798693A94EDB> /usr/lib/system/libxpc.dylib
+       0x1887ec000 -        0x18880bc03  libsystem_trace.dylib (1966.1.1) <9649346D-1AA0-3844-8401-1F2BEF5DEC12> /usr/lib/system/libsystem_trace.dylib
+       0x18880c000 -        0x1888c0e47  libcorecrypto.dylib (2109.0.22) <4747DEC8-74F6-3C3C-9CFA-958D749E55D4> /usr/lib/system/libcorecrypto.dylib
+       0x1888c1000 -        0x188916a07  libsystem_malloc.dylib (886.0.8) <5F121E9F-0046-36C7-B614-BD8EDA4252AA> /usr/lib/system/libsystem_malloc.dylib
+       0x188917000 -        0x18895d13f  libdispatch.dylib (1605.0.2) <35B1D5C9-46F5-3E6C-88EB-9FEF218B3F6A> /usr/lib/system/libdispatch.dylib
+       0x18895e000 -        0x188960d2b  libsystem_featureflags.dylib (108) <20C1CAB2-1F13-3426-8146-9CAE9FF2A33D> /usr/lib/system/libsystem_featureflags.dylib
+       0x188961000 -        0x1889e3bdb  libsystem_c.dylib (1786.0.3) <B9578568-B137-3A96-A8C8-096F0B6F95CD> /usr/lib/system/libsystem_c.dylib
+       0x1889e4000 -        0x188a79033  libc++.1.dylib (2200.27) <D69543EE-E165-3242-9281-5DAB86D55340> /usr/lib/libc++.1.dylib
+       0x188a7a000 -        0x188a93eff  libc++abi.dylib (2200.27) <6FBE4525-E708-3750-AE43-FC9D7327E8F5> /usr/lib/libc++abi.dylib
+       0x188a94000 -        0x188ad29ab  libsystem_kernel.dylib (13432.1.9) <1D409488-002C-3663-9BA9-37C334D384C1> /usr/lib/system/libsystem_kernel.dylib
+       0x188ad3000 -        0x188adf91b  libsystem_pthread.dylib (553.0.1) <A55DAC52-24D5-3CB7-9310-0C7C029498C5> /usr/lib/system/libsystem_pthread.dylib
+       0x188ae0000 -        0x188ae94f3  libsystem_platform.dylib (402.0.1.0.1) <97CB8000-7DFC-398B-B919-D525467BBF92> /usr/lib/system/libsystem_platform.dylib
+       0x188aea000 -        0x188b188f3  libsystem_info.dylib (603) <3E847D64-2B41-3505-AAE8-918B10DC3253> /usr/lib/system/libsystem_info.dylib
+       0x18cc3a000 -        0x18cc43ac3  libsystem_darwin.dylib (1786.0.3) <0270D881-5511-3056-8ABC-B62A1C4DEDF2> /usr/lib/system/libsystem_darwin.dylib
+       0x18d094000 -        0x18d0a5b8b  libsystem_notify.dylib (368) <BC2014EB-9569-3142-9B01-4ECD8ADD164E> /usr/lib/system/libsystem_notify.dylib
+       0x18f1ee000 -        0x18f208da3  libsystem_networkextension.dylib (2340.1.2) <FC8BD562-14AD-34BD-8DA8-5CB1DBF4F9FD> /usr/lib/system/libsystem_networkextension.dylib
+       0x18f295000 -        0x18f2ac247  libsystem_asl.dylib (409) <0B8B1F14-A7FB-302F-B56B-AD113BB71055> /usr/lib/system/libsystem_asl.dylib
+       0x19024c000 -        0x19024cf2f  libobjcMsgSend.dylib (973.1) <41179EDE-DC97-3BBE-8848-6400D12C1436> /usr/lib/objc/libobjcMsgSend.dylib
+       0x19137b000 -        0x191382edf  libsystem_symptoms.dylib (2394.0.4) <AEAE80CC-C6AE-344D-BBFC-E7A9DC4382D0> /usr/lib/system/libsystem_symptoms.dylib
+       0x1956f0000 -        0x19572aadb  libsystem_containermanager.dylib (833.0.8.0.1) <B33F2B09-4BE9-32C5-954C-9233E1D5BB94> /usr/lib/system/libsystem_containermanager.dylib
+       0x196d39000 -        0x196d3d317  libsystem_configuration.dylib (1446) <08EDCD0E-34BC-39E2-8B6C-4E5366461D75> /usr/lib/system/libsystem_configuration.dylib
+       0x196d3e000 -        0x196d44e03  libsystem_sandbox.dylib (3051.0.52) <1E892B56-092E-3832-BDE3-DCE356D7A4FA> /usr/lib/system/libsystem_sandbox.dylib
+       0x19824c000 -        0x19824cf2f  libobjcMsgSend1.dylib (973.1) <B40D9B2A-E1EE-37ED-8004-711A1F263DE1> /usr/lib/objc/libobjcMsgSend1.dylib
+       0x198916000 -        0x198918f93  libquarantine.dylib (217.0.4) <7FD4AE22-86EF-382B-83F5-ADF9336C1160> /usr/lib/system/libquarantine.dylib
+       0x199014000 -        0x19901a1e7  libsystem_coreservices.dylib (203) <7E74C917-CE45-393A-90B9-571B7BA0C9CF> /usr/lib/system/libsystem_coreservices.dylib
+       0x1995dc000 -        0x199619b27  libsystem_m.dylib (3326.0.1) <0F33CC3F-E56C-3322-90FC-D2DE78A8E2CC> /usr/lib/system/libsystem_m.dylib
+       0x19961b000 -        0x19961e4d7  libmacho.dylib (27062) <10767E82-A76D-335D-A289-B977D5507577> /usr/lib/system/libmacho.dylib
+       0x199638000 -        0x1996446ff  libcommonCrypto.dylib (600041) <215316D1-CCCC-3F21-B1A7-7AAA28C067BC> /usr/lib/system/libcommonCrypto.dylib
+       0x199645000 -        0x19964ec87  libunwind.dylib (2200.5) <12EC4D5E-7B70-3B75-B2F1-8060243A4BD3> /usr/lib/system/libunwind.dylib
+       0x199656000 -        0x1996607eb  libcopyfile.dylib (260.0.3) <52634F6F-1CEF-3F45-8F03-2807039C051C> /usr/lib/system/libcopyfile.dylib
+       0x199661000 -        0x1996648af  libcompiler_rt.dylib (103.4) <58DF4E26-8BF1-3A31-94D7-B837B76359A1> /usr/lib/system/libcompiler_rt.dylib
+       0x199665000 -        0x19966a087  libsystem_collections.dylib (1786.0.3) <31B75E6B-F7E4-352D-A1A3-716D667F8C7F> /usr/lib/system/libsystem_collections.dylib
+       0x19966b000 -        0x19966df1f  libsystem_secinit.dylib (182) <DE037464-4C5D-3E96-A33F-2A4557CC6A20> /usr/lib/system/libsystem_secinit.dylib
+       0x19966e000 -        0x19967097f  libremovefile.dylib (96) <E6E6DFCF-6B2C-3F30-A59D-816CAB1190CE> /usr/lib/system/libremovefile.dylib
+       0x199671000 -        0x199671e27  libkeymgr.dylib (31) <5EC997EF-3ADA-360B-9FCD-5F940C83FA4E> /usr/lib/system/libkeymgr.dylib
+       0x199672000 -        0x19967aaf7  libsystem_dnssd.dylib (3111.0.5.0.1) <CFEEC9C2-091A-32AE-8771-967374AE1994> /usr/lib/system/libsystem_dnssd.dylib
+       0x19967b000 -        0x19967ff1b  libcache.dylib (95) <83E81326-A587-374F-ABC1-BAE48D0FEE0D> /usr/lib/system/libcache.dylib
+       0x199680000 -        0x1996818f3  libSystem.B.dylib (1359) <4FDC9AA6-B344-37FE-B8C6-A4C94A038F57> /usr/lib/libSystem.B.dylib
+       0x1a024c000 -        0x1a024cf2f  libobjcMsgSend2.dylib (973.1) <BD27A84B-C9AE-3282-BBEA-3B6119837B5A> /usr/lib/objc/libobjcMsgSend2.dylib
+       0x1a824c000 -        0x1a824cf2f  libobjcMsgSend3.dylib (973.1) <C0860D68-DDFC-3BD7-8B06-DB0645CBBED4> /usr/lib/objc/libobjcMsgSend3.dylib
+       0x1b024c000 -        0x1b024cf2f  libobjcMsgSend4.dylib (973.1) <A6153BF5-622B-3B01-81B6-F64A365EF613> /usr/lib/objc/libobjcMsgSend4.dylib
+       0x1b824c000 -        0x1b824cf2f  libobjcMsgSend5.dylib (973.1) <3913A71C-B29A-3AEA-820B-BEC40AC1861A> /usr/lib/objc/libobjcMsgSend5.dylib
+       0x1c024c000 -        0x1c024cf2f  libobjcMsgSend6.dylib (973.1) <9BC523A3-E167-3F6C-8CAE-0F3EBA671791> /usr/lib/objc/libobjcMsgSend6.dylib
+       0x1c824c000 -        0x1c824cf2f  libobjcMsgSend7.dylib (973.1) <248B7BCE-5B4C-34C7-A340-43D5228628C5> /usr/lib/objc/libobjcMsgSend7.dylib
+       0x1d024c000 -        0x1d024cf2f  libobjcMsgSend8.dylib (973.1) <3E041BAD-A8E8-3069-B741-78CD1A45B176> /usr/lib/objc/libobjcMsgSend8.dylib
+       0x1d824c000 -        0x1d824cf2f  libobjcMsgSend9.dylib (973.1) <34A67969-21A0-39D6-BB81-8FDA5A2409DB> /usr/lib/objc/libobjcMsgSend9.dylib
+       0x1e024c000 -        0x1e024cf2f  libobjcMsgSend10.dylib (973.1) <678186C0-8EAD-3B35-8CBB-00285B41E4A0> /usr/lib/objc/libobjcMsgSend10.dylib
+       0x1e824c000 -        0x1e824cf2f  libobjcMsgSend11.dylib (973.1) <E05CB08C-E956-36FA-8967-AE8E346A8D2C> /usr/lib/objc/libobjcMsgSend11.dylib
+       0x21024c000 -        0x21024cf2f  libobjcMsgSend12.dylib (973.1) <10AB03AA-FF1F-3FDC-9DFB-BFC40042C501> /usr/lib/objc/libobjcMsgSend12.dylib
+       0x21824c000 -        0x21824cf2f  libobjcMsgSend13.dylib (973.1) <ABF53427-FA6F-3D0D-8F9D-7AD795CA5C92> /usr/lib/objc/libobjcMsgSend13.dylib
+       0x22024c000 -        0x22024cf2f  libobjcMsgSend14.dylib (973.1) <9A844C46-A6DA-34D4-8EBF-2AD775C30684> /usr/lib/objc/libobjcMsgSend14.dylib
+       0x22824c000 -        0x22824cf2f  libobjcMsgSend15.dylib (973.1) <7C995666-2B2D-3284-AA0A-EBF7C922838E> /usr/lib/objc/libobjcMsgSend15.dylib
+       0x23024c000 -        0x23024cf2f  libobjcMsgSend16.dylib (973.1) <B6C0E14B-53AE-3E22-9ED5-1729C49F46F2> /usr/lib/objc/libobjcMsgSend16.dylib
+       0x23824c000 -        0x23824cf2f  libobjcMsgSend17.dylib (973.1) <07B4CF85-251B-301B-832B-20B315A59E19> /usr/lib/objc/libobjcMsgSend17.dylib
+       0x24024c000 -        0x24024cf2f  libobjcMsgSend18.dylib (973.1) <43E575B7-04DB-3999-A633-1A3B638BA6E3> /usr/lib/objc/libobjcMsgSend18.dylib
+       0x24824c000 -        0x24824cf2f  libobjcMsgSend19.dylib (973.1) <736F4D85-76F7-3B28-8D87-C07E8F7A0EF4> /usr/lib/objc/libobjcMsgSend19.dylib
+       0x25024c000 -        0x25024cf2f  libobjcMsgSend20.dylib (973.1) <74E67C8B-6BCA-3184-A18E-A97F370052C6> /usr/lib/objc/libobjcMsgSend20.dylib
+       0x25824c000 -        0x25824cf2f  libobjcMsgSend21.dylib (973.1) <CC0D732F-98E7-3888-9E15-70984DA2FB04> /usr/lib/objc/libobjcMsgSend21.dylib
+       0x26024c000 -        0x26024cf2f  libobjcMsgSend22.dylib (973.1) <85A60286-5DE3-32BA-B18C-2A498B065C88> /usr/lib/objc/libobjcMsgSend22.dylib
+       0x26824c000 -        0x26824cf2f  libobjcMsgSend23.dylib (973.1) <5452A0D2-6B19-39BE-ADDD-80B7BCDE3A98> /usr/lib/objc/libobjcMsgSend23.dylib
+       0x27024c000 -        0x27024cf2f  libobjcMsgSend24.dylib (973.1) <94BBF2D6-722B-350D-8557-4D25A8E8D53A> /usr/lib/objc/libobjcMsgSend24.dylib
+       0x27824c000 -        0x27824cf2f  libobjcMsgSend25.dylib (973.1) <35481387-5A8E-3AE4-86A6-94CEB3CC8726> /usr/lib/objc/libobjcMsgSend25.dylib
+       0x29824c000 -        0x29824cf2f  libobjcMsgSend26.dylib (973.1) <9E0C8664-E7F4-39D1-AAFC-BD92B255E4E8> /usr/lib/objc/libobjcMsgSend26.dylib
+       0x2a024c000 -        0x2a024cf2f  libobjcMsgSend27.dylib (973.1) <FD424935-55A9-3650-955A-EED3441A1D19> /usr/lib/objc/libobjcMsgSend27.dylib
+       0x2a824c000 -        0x2a824cf2f  libobjcMsgSend28.dylib (973.1) <09BA7B97-7DF7-3C7F-932A-B6847662FC49> /usr/lib/objc/libobjcMsgSend28.dylib
+       0x2b024c000 -        0x2b024cf2f  libobjcMsgSend29.dylib (973.1) <36D5BA3F-2139-30B0-8558-556764BE9813> /usr/lib/objc/libobjcMsgSend29.dylib
+       0x2b824c000 -        0x2b824cf2f  libobjcMsgSend30.dylib (973.1) <9F05564A-9D12-372C-98FC-E9F0E6BE4F04> /usr/lib/objc/libobjcMsgSend30.dylib
+       0x2baa66000 -        0x2baa6cfe5  libRosetta.dylib (385) <88E33EA4-A20E-3ED1-AD7D-8D029E4E08BC> /usr/lib/libRosetta.dylib
+       0x2bb453000 -        0x2bb45675b  libsystem_darwindirectory.dylib (129.0.1) <61264923-2AA5-3658-B8C4-550C71E9D4B3> /usr/lib/system/libsystem_darwindirectory.dylib
+       0x2bb457000 -        0x2bb461d9b  libsystem_eligibility.dylib (446.1.3) <EDDE8E9C-A2CF-3931-BBB3-321CB852EB30> /usr/lib/system/libsystem_eligibility.dylib
+       0x2bb462000 -        0x2bb46b42b  libsystem_sanitizers.dylib (32) <447BAA25-4DFF-3A23-976A-4B96AF067112> /usr/lib/system/libsystem_sanitizers.dylib
+       0x2bb46c000 -        0x2bb46ca13  libsystem_trial.dylib (511) <6AE48824-EC44-3A8C-B501-BE57DBE892E7> /usr/lib/system/libsystem_trial.dylib
+       0x2c024c000 -        0x2c024cf2f  libobjcMsgSend31.dylib (973.1) <0985E20F-78C3-3466-A2B2-DBB95F7104A3> /usr/lib/objc/libobjcMsgSend31.dylib
+       0x2c824c000 -        0x2c824cf2f  libobjcMsgSend32.dylib (973.1) <0D309D58-D576-3E5D-AD4B-6D55AB491702> /usr/lib/objc/libobjcMsgSend32.dylib
+       0x2d024c000 -        0x2d024cf2f  libobjcMsgSend33.dylib (973.1) <346E0484-48FA-369B-8A64-93B5F5341CFE> /usr/lib/objc/libobjcMsgSend33.dylib
+       0x2d824c000 -        0x2d824cf2f  libobjcMsgSend34.dylib (973.1) <6A31F809-BCBE-3E01-A367-E91FDACCE324> /usr/lib/objc/libobjcMsgSend34.dylib

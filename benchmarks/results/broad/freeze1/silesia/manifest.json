@@ -1,0 +1,98 @@
+[
+  {
+    "file": "dickens",
+    "input_bytes": 10192446,
+    "sha256": "b24c37886142e11d0ee687db6ab06f936207aa7f2ea1fd1d9a36763c7a507e6a",
+    "encoded_bytes": 6410143,
+    "encoded_sha256": "668ddcb4d47a6cb6bb68f283ba93243fdf3adfca3e622e7f9683197027ae379a",
+    "reference_sha256": "5801e11fdffc3814ccc820e60884f99baeed6cf0a0664368b399f1bb941dd370"
+  },
+  {
+    "file": "mozilla",
+    "input_bytes": 51220480,
+    "sha256": "657fc3764b0c75ac9de9623125705831ebbfbe08fed248df73bc2dc66e2a963b",
+    "encoded_bytes": 24802049,
+    "encoded_sha256": "d971a56df6995b318896f8f53874cc32c13698160f8c38679d31680be987cd2a",
+    "reference_sha256": "54f44447552512b3384e968531a60f257cfe5647e4d761f5c9749f8168bd8e45"
+  },
+  {
+    "file": "mr",
+    "input_bytes": 9970564,
+    "sha256": "68637ed52e3e4860174ed2dc0840ac77d5f1a60abbcb13770d5754e3774d53e6",
+    "encoded_bytes": 5443667,
+    "encoded_sha256": "68fd6ccc769b9bbf90ca788376d95a07d339762f05b1fef90ecaee8a485d1241",
+    "reference_sha256": "c9923e2d961afc7515a824f2867b561cdfe784ce1a9893558fb1c3ee634fbb50"
+  },
+  {
+    "file": "nci",
+    "input_bytes": 33553445,
+    "sha256": "fc63a31770947b8c2062d3b19ca94c00485a232bb91b502021948fee983e1635",
+    "encoded_bytes": 5740026,
+    "encoded_sha256": "e25edb2d7098816944389ebe5628286fb786f85d5fc2e834d73b84f1ab5a89bd",
+    "reference_sha256": "8aef507a7b5efdb36af4e5186272abd82e5f80df6ca674281c1dedae3634a682"
+  },
+  {
+    "file": "ooffice",
+    "input_bytes": 6152192,
+    "sha256": "e7ee013880d34dd5208283d0d3d91b07f442e067454276095ded14f322a656eb",
+    "encoded_bytes": 4030021,
+    "encoded_sha256": "ce4bc0fca0caad50c60870da8a8b967c524b0a58b3f3b47a14b1bdf1739d50ff",
+    "reference_sha256": "7d4ce5a5c6586ef9cc77321e97a4b32a97e11f19f2df3bfcadbbcaba0bcb29cd"
+  },
+  {
+    "file": "osdb",
+    "input_bytes": 10085684,
+    "sha256": "60f027179302ca3ad87c58ac90b6be72ec23588aaa7a3b7fe8ecc0f11def3fa3",
+    "encoded_bytes": 4929590,
+    "encoded_sha256": "004553f71827e83244acfd5b868923618b6cc387fa0c6f5392e1a6fd252bd56c",
+    "reference_sha256": "caee312d27b2dd7761ed7f3dc783ac12c4f3d84b83e62e797214e01e4c826b42"
+  },
+  {
+    "file": "reymont",
+    "input_bytes": 6627202,
+    "sha256": "0eac0114a3dfe6e2ee1f345a0f79d653cb26c3bc9f0ed79238af4933422b7578",
+    "encoded_bytes": 3387275,
+    "encoded_sha256": "49e28d70bfa8a7c331607d1e86968e80d333c87b81fc1d14a0e92ceb45677d87",
+    "reference_sha256": "047ce4dd9d4ccc7f5ac12ccf6bd0799407932adb07781bbe09c88dadc9f7cc92"
+  },
+  {
+    "file": "samba",
+    "input_bytes": 21606400,
+    "sha256": "93ba07bc44d8267789c1d911992f40b089ffa2140b4a160fac11ccae9a40e7b2",
+    "encoded_bytes": 7711469,
+    "encoded_sha256": "66ca2862f0fd7099ab2d2531875268a4c4ba3c62f73fa589ad8b358b58be4bff",
+    "reference_sha256": "09e2a04363f0fdbb3aab3f29f1dd7b702b857708f7de78caf6c0edfcd47a6654"
+  },
+  {
+    "file": "sao",
+    "input_bytes": 7251944,
+    "sha256": "c2d0ea2cc59d4c21b7fe43a71499342a00cbe530a1d5548770e91ecd6214adcc",
+    "encoded_bytes": 6342581,
+    "encoded_sha256": "62a944028a56da9eb45a5ccb4aa8f033d97a67b991789db39f5660bb0ed0a0fe",
+    "reference_sha256": "6d5fe3dd2203fd39cf72a1049156806165e9e6eb6e55a57ab98af6af989a29b8"
+  },
+  {
+    "file": "webster",
+    "input_bytes": 41458703,
+    "sha256": "6a68f69b26daf09f9dd84f7470368553194a0b294fcfa80f1604efb11143a383",
+    "encoded_bytes": 20074324,
+    "encoded_sha256": "e4f48440748fe01b63f02bd5725e0495c7582f5a5b24f6d33339dc5ca96032ed",
+    "reference_sha256": "391470b35f5be89ec3898aabe7d1c86b191fb76808d4f53ebfed34f019c2567a"
+  },
+  {
+    "file": "x-ray",
+    "input_bytes": 8474240,
+    "sha256": "7de9fce1405dc44ae5e6813ed21cd5751e761bd4265655a005d39b9685d1c9ad",
+    "encoded_bytes": 8004585,
+    "encoded_sha256": "cb5997e38599c019521d1b5fd23137b8b264c86a654a0745fa206e09d992d6fd",
+    "reference_sha256": "5e95343fa61ae04edae603c03219e825bdf9861ed94927423ff8e0311ed25331"
+  },
+  {
+    "file": "xml",
+    "input_bytes": 5345280,
+    "sha256": "0e82e54e695c1938e4193448022543845b33020c8be6bf3bf3ead2224903e08c",
+    "encoded_bytes": 1256050,
+    "encoded_sha256": "6af69c0fca9f1c4b99096af76b724cb2816f9017996550e2ab823f5340b9a39b",
+    "reference_sha256": "8ed75acebceb782cb0bbc8539aae92eca87c8eb15d962d60d4f2736d7c443449"
+  }
+]

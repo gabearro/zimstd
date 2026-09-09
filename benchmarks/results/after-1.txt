@@ -1,0 +1,23 @@
+repeated  1048576 ->      238 bytes  retained      304  encode   2414.5 MiB/s  decode   3996.6 MiB/s  [209762800]
+records   1220890 ->   110355 bytes  retained   163840  encode    718.6 MiB/s  decode    722.1 MiB/s  [266249000]
+random    1048576 ->  1048614 bytes  retained  1343488  encode   2469.9 MiB/s  decode   4230.0 MiB/s  [419438000]
+huffman     90000 ->    71251 bytes  retained    73728  encode   2495.0 MiB/s  decode    137.0 MiB/s  [36003400]
+binary     140000 ->    70204 bytes  retained    73728  encode    107.7 MiB/s  decode    160.5 MiB/s  [53679400]
+        1.47 real         1.45 user         0.01 sys
+            23347200  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                1624  page reclaims
+                   1  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+                 346  involuntary context switches
+         22169314071  instructions retired
+          3831504723  cycles elapsed
+            19399064  peak memory footprint

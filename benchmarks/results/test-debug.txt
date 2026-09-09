@@ -1,0 +1,25 @@
+  Executing task test in /Users/gabriel/Documents/nimlang/zstd/zstd.nimble
+Hint: used config file '/Users/gabriel/.choosenim/toolchains/nim-2.2.6/config/nim.cfg' [Conf]
+Hint: used config file '/Users/gabriel/.choosenim/toolchains/nim-2.2.6/config/config.nims' [Conf]
+...............................................................................................................................
+CC: system.nim
+CC: zstd/encode.nim
+CC: test_zstd.nim
+Hint:  [Link]
+Hint: mm: orc; threads: on; opt: none (DEBUG BUILD, `-d:release` generates faster code)
+56761 lines; 0.802s; 91.855MiB peakmem; proj: /Users/gabriel/Documents/nimlang/zstd/tests/test_zstd.nim; out: /Users/gabriel/Documents/nimlang/zstd/tests/test_zstd [SuccessX]
+Hint: /Users/gabriel/Documents/nimlang/zstd/tests/test_zstd [Exec]
+vector: 1890a371.gettysburg.txt-100x.zst
+vector: binary-1.zst
+vector: binary-19.zst
+vector: binary-9.zst
+vector: f2a8e35c.helloworld-11000x.zst
+vector: fcf30b99.zero-dictionary-ids.zst
+vector: huffman-1.zst
+vector: huffman-19.zst
+vector: huffman-9.zst
+vector: multiblock-1.zst
+vector: multiblock-19.zst
+vector: multiblock-9.zst
+codec regressions and 2,000 corruption cases passed
+unaligned word loads and bulk bit refills passed

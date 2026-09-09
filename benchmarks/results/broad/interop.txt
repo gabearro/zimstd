@@ -1,0 +1,10 @@
+  Executing task interop in /Users/gabriel/Documents/nimlang/zstd/zstd.nimble
+Hint: used config file '/Users/gabriel/.choosenim/toolchains/nim-2.2.6/config/nim.cfg' [Conf]
+Hint: used config file '/Users/gabriel/.choosenim/toolchains/nim-2.2.6/config/config.nims' [Conf]
+..........................................................................................................................................
+CC: zstd/decode.nim
+Hint:  [Link]
+Hint: mm: orc; threads: on; opt: speed; options: -d:release
+61481 lines; 0.884s; 91.984MiB peakmem; proj: /Users/gabriel/Documents/nimlang/zstd/tests/interop.nim; out: /Users/gabriel/Documents/nimlang/zstd/tests/interop [SuccessX]
+Hint: /Users/gabriel/Documents/nimlang/zstd/tests/interop [Exec]
+126 reference interoperability cases passed

@@ -1,0 +1,11 @@
+{
+  "canterbury_archive_sha256": "f140e8a5b73d3f53198555a63bfb827889394a42f20825df33c810c3d5e3f8fb",
+  "silesia_archive_sha256": "0626e25f45c0ffb5dc801f13b7c82a3b75743ba07e3a71835a41e3d9f63c77af",
+  "codec_sha256": {
+    "src/zstd/common.nim": "1cecb0fd10fd8be31ff7d50cbe6f2b3682aea60cc4d5ad586f44cf829acdfda6",
+    "src/zstd/decode.nim": "1568eee219b0fe7da1af8a97e84db22bc9a94aeed98a063be872e264c4d9a130",
+    "src/zstd/encode.nim": "f38ed017c785774a127f1462e2082082d9eccf769df2a7ad6ad0dbce076260f8",
+    "src/zstd/xxhash.nim": "7f443d370bcdfaa55658f29cabb07b2033c771d9c39cda46faeb06a9e850d592",
+    "src/zstd.nim": "ba0668f86a7b2b88376eecee0db51897c48fefda48005286cec787836f84b1fe"
+  }
+}
