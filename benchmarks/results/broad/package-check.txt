@@ -1,4 +1,0 @@
-     Info:  Validating dependencies for pkgInfo pikNone
-     Info:  Parsed declarative dependencies: @[nim@>= 2.0.0]
-     Info:  Parsed VM dependencies: @[nim@>= 2.0.0]
-  Success:  The package "zstd" is valid.

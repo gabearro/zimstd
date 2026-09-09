@@ -141,13 +141,6 @@ working memory over compression ratio; it does not aim to match libzstd's ratio.
 **Not implemented:** external dictionaries, compression levels, adaptive encoder
 entropy coding, or cross-block encoder matches.
 
-## Performance
-
-See the [profiling report](benchmarks/BROAD_PROFILE.md) for historical in-memory
-measurements, methodology, and reproduction commands. Those results predate the
-streaming API; they are not a comparison with libzstd. Benchmark your own inputs
-with `nimble bench` or the corpus tools below.
-
 ## Development
 
 ```sh
@@ -161,7 +154,8 @@ range, and overflow checks, including in release builds; `-d:danger` is not need
 See [test vector provenance](tests/vectors/README.md).
 
 For corpus benchmarks, use [corpus.nim](benchmarks/corpus.nim) and the
-[comparison driver](benchmarks/compare.py), following the profiling report.
+[comparison driver](benchmarks/compare.py). Run `python3 benchmarks/compare.py --help`
+for options.
 
 If Nimble fails while scanning an unrelated installed package, use a clean
 package directory:

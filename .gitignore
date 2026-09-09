@@ -9,3 +9,6 @@
 /tests/test_streaming
 /tests/test_zstd
 .DS_Store
+/benchmarks/results/
+/benchmarks/PROFILE.md
+/benchmarks/BROAD_PROFILE.md
