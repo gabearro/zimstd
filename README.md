@@ -239,6 +239,12 @@ Or run the regression suite directly:
 nim c -r --path:src tests/test_zimstd.nim
 ```
 
+## Contact
+
+Maintainer: [gabearro](https://github.com/gabearro) —
+[33171826+gabearro@users.noreply.github.com](mailto:33171826+gabearro@users.noreply.github.com).
+For questions and bug reports, use [GitHub Issues](https://github.com/gabearro/zimstd/issues).
+
 ## License and acknowledgments
 
 ZimSTD is licensed under [BSD-3-Clause](LICENSE). The entropy decoder follows

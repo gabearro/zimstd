@@ -1,5 +1,5 @@
 version = "0.1.0"
-author = "ZimSTD contributors"
+author = "gabearro <33171826+gabearro@users.noreply.github.com>"
 description = "ZimSTD: pure Nim Zstandard compression and decompression"
 license = "BSD-3-Clause"
 srcDir = "src"
