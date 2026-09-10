@@ -1,14 +1,17 @@
 ## Configurable block-local LZ77 with a 64 KiB hash table and predefined FSE codes.
 import common, xxhash
-import std/[endians, streams]
+import std/[endians, streams, bitops]
 
 type
-  Sequence = object
-    literal, match, offset: uint32
+  Sequence = uint64 # Three 17-bit fields; each is strictly below BlockSize.
   BitWriter = object
     bytes: string
     bits: uint64
     count: int
+
+template literal(s: Sequence): int = int(s and 0x1ffff)
+template match(s: Sequence): int = int((s shr 17) and 0x1ffff)
+template offset(s: Sequence): int = int(s shr 34)
 
 template write(w: var BitWriter, value, n: int) =
   w.bits = w.bits or ((uint64(value) and mask(n)) shl w.count)
@@ -35,20 +38,24 @@ const
   EncodeOf = inverse[29, 32](DefaultOf)
   EncodeMl = inverse[53, 64](DefaultMl)
 
-proc symbol(value: int, bases: openArray[int]): int {.inline.} =
-  # Tiny length tables; binary search avoids scans for long matches.
-  if value < bases[16]: return value-bases[0]
-  var lo = 0
-  var hi = bases.len
-  while lo+1 < hi:
-    let mid = (lo+hi) shr 1
-    if bases[mid] <= value: lo = mid
-    else: hi = mid
-  lo
+template symbol(value: int, bases: static[openArray[int]]): int =
+  block:
+    const codes = block:
+      var table: array[128, uint8]
+      var code = 0
+      for i in 0..<table.len:
+        while code+1 < bases.len and bases[code+1] <= i+bases[0]: inc code
+        table[i] = uint8(code)
+      table
+    let n = value-bases[0]
+    if n < codes.len: int(codes[n])
+    else: floorLog(n)+(when bases[0] == 0: 19 else: 36)
 
-proc transition(w: var BitWriter, state: var int, entry: uint16) {.inline.} =
-  w.write(state, int(entry shr 6))
-  state = int(entry and 63)
+template transition(w: var BitWriter, state: var int, entry: uint16) =
+  block:
+    let code = entry
+    w.write(state, int(code shr 6))
+    state = int(code and 63)
 
 proc encodeSequences(dst: var string, sequences: seq[Sequence]) =
   var w = BitWriter(bytes: move(dst))
@@ -110,10 +117,13 @@ proc word(data: openArray[char], p: int): uint32 {.inline.} =
   copyMem(addr result, unsafeAddr data[p], 4)
 proc hash(v: uint32): int {.inline.} = int((v*2654435761'u32) shr 18)
 
-proc literalsHeader(dst: var string, size: int) =
-  if size < 32: dst.add char(size shl 3)
-  elif size < 4096: dst.putLe(uint64((size shl 4) or 4), 2)
-  else: dst.putLe(uint64((size shl 4) or 12), 3)
+proc literalsHeader(dst: var string, start: int) =
+  let size = dst.len-start-3
+  let bytes = if size < 32: 1 elif size < 4096: 2 else: 3
+  let header = if bytes == 1: size shl 3 else: (size shl 4) or (if bytes == 2: 4 else: 12)
+  if bytes < 3 and size > 0: moveMem(addr dst[start+bytes], addr dst[start+3], size)
+  for i in 0..<bytes: dst[start+i] = char((header shr (8*i)) and 255)
+  dst.setLen(dst.len-3+bytes)
 
 proc addBlock(dst: var string, data: openArray[char], kind, last: int) =
   let old = dst.len
@@ -132,20 +142,28 @@ proc compressionLevel(level: int): int =
           "compression level must be between -131072 and 22")
   if level == 0: DefaultCompressionLevel else: level
 
-proc matchLength(data: openArray[char], p, prev: int): int {.inline.} =
-  result = 4 # Caller checked the first four bytes.
-  while p+result+8 <= data.len:
-    var a, b: uint64
-    copyMem(addr a, unsafeAddr data[p+result], 8)
-    copyMem(addr b, unsafeAddr data[prev+result], 8)
-    if a != b: break
-    result += 8
-  while p+result < data.len and data[p+result] == data[prev+result]: inc result
+template matchLength(data: openArray[char], p, prev: int): int =
+  block:
+    var length = 4 # Caller checked the first four bytes.
+    block matched:
+      while p+length+8 <= data.len:
+        var a, b: uint64
+        copyMem(addr a, unsafeAddr data[p+length], 8)
+        copyMem(addr b, unsafeAddr data[prev+length], 8)
+        let difference = a xor b
+        if difference != 0:
+          when cpuEndian == littleEndian:
+            length += countTrailingZeroBits(difference) shr 3
+          else:
+            length += countLeadingZeroBits(difference) shr 3
+          break matched
+        length += 8
+      while p+length < data.len and data[p+length] == data[prev+length]: inc length
+    length
 
 type EncodeScratch = object
   chain: seq[uint32]
   sequences: seq[Sequence]
-  literals: string
 
 proc bestMatch(scratch: EncodeScratch, data: openArray[char], p, head, depth: int): tuple[pos, length: int] =
   var candidate = head
@@ -173,19 +191,19 @@ proc encodeBlock(scratch: var EncodeScratch, data: openArray[char],
     # parsing/adaptive entropy if matching libzstd's high-level ratios is needed.
     const depths = [2,3,4,6,8,12,16,24,32,48,64,96,128,192,256,384,512,768,1024]
     let depth = depths[level-4]
-    scratch.chain.setLen(size)
   else:
     let acceleration = if level < 0: -level else: 1
     let skipShift = if level < 0: 4 elif level == 1: 5 elif level == 2: 6 else: 7
   var run = size > 0
-  for i in start+1..<stop:
-    if data[i] != data[start]:
-      run = false
-      break
+  if size >= 5: run = word(data, 0) == word(data, 1) and matchLength(data, 1, 0) == size-1
+  else:
+    for i in 1..<size:
+      if data[i] != data[0]: run = false
   if run:
     result.putLe(uint64((size shl 3) or 2 or last), 3)
     result.add data[start]
   else:
+    when deep: scratch.chain.setLen(size)
     # Preserve the full hash and match choices for short messages, while
     # clearing 2 KiB of presence bits instead of 64 KiB of positions.
     let sparse = not deep and size < 1024
@@ -204,7 +222,8 @@ proc encodeBlock(scratch: var EncodeScratch, data: openArray[char],
         when deep: scratch.chain[position-1] = previous
         previous
     scratch.sequences.setLen(0)
-    scratch.literals.setLen(0)
+    let blockStart = result.len
+    result.setLen(blockStart+6) # Reserve block and literal headers.
     var anchor = start
     var p = start
     var misses = 0
@@ -226,10 +245,10 @@ proc encodeBlock(scratch: var EncodeScratch, data: openArray[char],
         if prev >= start and word(data, prev) == v:
           length = matchLength(data, p, prev)
       if length >= 4:
-        let old = scratch.literals.len
-        scratch.literals.setLen(old+p-anchor)
-        if p > anchor: copyMem(addr scratch.literals[old], unsafeAddr data[anchor], p-anchor)
-        scratch.sequences.add Sequence(literal: uint32(p-anchor), match: uint32(length), offset: uint32(p-prev))
+        let old = result.len
+        result.setLen(old+p-anchor)
+        if p > anchor: copyMem(addr result[old], unsafeAddr data[anchor], p-anchor)
+        scratch.sequences.add uint64(p-anchor) or (uint64(length) shl 17) or (uint64(p-prev) shl 34)
         when deep:
           for position in p+1..min(p+length-1, stop-4):
             discard replaceSlot(hash(word(data, position)), position+1)
@@ -242,18 +261,19 @@ proc encodeBlock(scratch: var EncodeScratch, data: openArray[char],
         inc misses
         when deep: inc p
         else: p += acceleration+(misses shr skipShift)
-    var encoded: string
     if scratch.sequences.len > 0:
-      let old = scratch.literals.len
-      scratch.literals.setLen(old+stop-anchor)
-      if stop > anchor: copyMem(addr scratch.literals[old], unsafeAddr data[anchor], stop-anchor)
-      encoded.literalsHeader(scratch.literals.len)
-      encoded.add scratch.literals
-      encoded.encodeSequences(scratch.sequences)
-    if scratch.sequences.len > 0 and encoded.len < size:
-      result.addBlock(encoded, 2, last)
-    else:
-      result.addBlock(data.toOpenArray(start, stop-1), 0, last)
+      let old = result.len
+      result.setLen(old+stop-anchor)
+      if stop > anchor: copyMem(addr result[old], unsafeAddr data[anchor], stop-anchor)
+      result.literalsHeader(blockStart+3)
+      result.encodeSequences(scratch.sequences)
+      let encodedSize = result.len-blockStart-3
+      if encodedSize < size:
+        let header = (encodedSize shl 3) or 4 or last
+        for i in 0..2: result[blockStart+i] = char((header shr (8*i)) and 255)
+        return
+    result.setLen(blockStart)
+    result.addBlock(data.toOpenArray(start, stop-1), 0, last)
 
 proc encodeBlock(scratch: var EncodeScratch, data: openArray[char],
                  output: var string, last, level: int) =

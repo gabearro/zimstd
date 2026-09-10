@@ -146,7 +146,9 @@ codec does not close or flush them. Read/write failures propagate to the caller.
   in-memory encoder's known-size frame.
 - `decompress(input, output, maxOutput = 256 MiB, maxWindow = 128 MiB)` retains
   rolling match history and entropy tables across blocks. Working memory is
-  O(window + block size), independent of total decoded size. Output is written
+  O(window + block size), independent of total decoded size. Known-size frames
+  reserve history capacity up to `min(contentSize, 2*window + 128 KiB)`, plus
+  allocator overhead. Output is written
   one block at a time; limits also apply to concatenated frames.
 - Forward-only blocking streams are supported. Short reads are retried; a
   zero-byte read means EOF. These are synchronous calls, not nonblocking
@@ -171,6 +173,8 @@ The decoder supports:
 The encoder uses block-local greedy or lazy LZ77 with predefined FSE tables, RLE sequence
 tables for single matches, and raw/RLE block fallbacks. It favors speed and small
 working memory over compression ratio; it does not aim to match libzstd's ratio.
+Sequence records use eight bytes each, and literals are written directly into
+the frame buffer. RLE blocks skip match-chain allocation at every level.
 
 **Not implemented:** external dictionaries, adaptive encoder entropy coding,
 optimal parsing, or cross-block encoder matches.
@@ -179,15 +183,15 @@ optimal parsing, or cross-block encoder matches.
 
 Measured on an **Apple M3 Max (macOS, ARM64)** with **Nim 2.2.6**, release/ORC,
 compression level 3, checksums enabled, and bounds/range/overflow checks retained. Values are medians
-of **five runs, 200 iterations per workload per run**, measured September 9, 2026.
+of **five runs, 200 iterations per workload per run**, measured September 10, 2026.
 
 | Workload | Input bytes | Encode (MiB/s) | Decode (MiB/s) |
 | --- | ---: | ---: | ---: |
-| Repeated 16-byte pattern | 1,048,576 | 2,429 | 5,720 |
-| Generated record text | 1,220,890 | 826 | 956 |
-| Uniform random bytes | 1,048,576 | 2,410 | 5,712 |
-| Weighted printable bytes | 90,000 | 2,453 | 181 |
-| Random bytes from a 16-value alphabet | 140,000 | 117 | 215 |
+| Repeated 16-byte pattern | 1,048,576 | 2,891 | 9,059 |
+| Generated record text | 1,220,890 | 1,156 | 1,460 |
+| Uniform random bytes | 1,048,576 | 2,629 | 9,093 |
+| Weighted printable bytes | 90,000 | 2,796 | 156 |
+| Random bytes from a 16-value alphabet | 140,000 | 141 | 229 |
 
 Throughput counts **uncompressed bytes** (1 MiB = 1,048,576 bytes). These are
 single-threaded, in-memory calls, including output allocation, with no disk I/O.
@@ -199,7 +203,8 @@ levels 9 and 19, respectively; encoding always uses ZimSTD. This exercises entro
 decoding that the current encoder does not itself emit. Uniform random input
 mostly uses raw blocks, so its high decode rate does not represent compressed
 entropy-coded data. These small synthetic workloads fit in cache; performance
-on larger files and other machines will vary.
+on larger files and other machines will vary. Weighted-printable decoding
+varied from 155 to 202 MiB/s across these runs; the table shows its median.
 
 Reproduce with the checked-in [benchmark](benchmarks/bench.nim):
 

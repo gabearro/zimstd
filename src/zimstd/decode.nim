@@ -207,13 +207,14 @@ proc execSequences(d: var Decoder, data, literals: openArray[char], pos: int,
       states[2] = int(me.base)+r.take(data, int(me.bits))
       states[1] = int(oe.base)+r.take(data, int(oe.bits))
     require(literal <= literals.len-litPos, "literal length overflow")
-    dst.appendBytes(literals, litPos, literal, stop)
-    litPos += literal
-    require(offset > 0 and offset <= dst.len-frameStart and
-      (offset <= window or offset <= dst.len-blockStart), "match offset outside window")
-    require(match <= stop-dst.len, "match length overflow")
-    let old = dst.len
+    require(literal <= stop-dst.len, "decompressed size limit exceeded")
+    let old = dst.len+literal
+    require(offset > 0 and offset <= old-frameStart and
+      (offset <= window or offset <= old-blockStart), "match offset outside window")
+    require(match <= stop-old, "match length overflow")
     dst.setLen(old+match)
+    if literal > 0: copyMem(addr dst[old-literal], unsafeAddr literals[litPos], literal)
+    litPos += literal
     # Non-overlapping doubling copies also handle offset=1 without byte loops.
     var copied = 0
     while copied < match:
@@ -368,7 +369,12 @@ proc decompress*(input, output: Stream, maxOutput = 256*1024*1024,
     p = 0
     let header = readHeader(bytes, p, maxOutput-total, maxWindow)
     d.reset()
-    history.setLen(0)
+    if header.hasSize:
+      # min(content size, 2*window + block), without overflowing large limits.
+      let reserve = min(header.window, header.size div 2)*2
+      history = "" # Release the preceding frame before allocating its replacement.
+      history = newStringOfCap(reserve+min(BlockSize, header.size-reserve))
+    else: history.setLen(0)
     var hash = initXxh64()
     var frameBytes = 0
     while true:

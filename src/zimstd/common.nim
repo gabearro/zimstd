@@ -47,23 +47,37 @@ proc initReverse*(data: openArray[char], start, stop: int): ReverseBits =
   require(last != 0, "missing bitstream end marker")
   result = ReverseBits(pos: stop-1, start: start, count: floorLog(last), bits: uint64(last))
 
-proc fetch*(r: var ReverseBits, data: openArray[char], n: int): bool {.inline.} =
-  # Callers request at most 31 bits; a 32-bit refill fits the 64-bit cache.
-  if r.count < n and r.pos-r.start >= 4:
-    var p = r.pos-4
-    r.bits = (r.bits shl 32) or readLe(data, p, 4)
-    r.pos -= 4
-    r.count += 32
-  while r.count < n and r.pos > r.start:
-    dec r.pos
-    r.bits = (r.bits shl 8) or uint64(ord(data[r.pos]))
-    r.count += 8
-  r.count >= n
+## Templates keep these checked hot paths inline even when the C compiler
+## declines to inline the equivalent procedures.
+## FSE take() benefits from the direct load; Huffman fetch() is faster through
+## readLe on the measured ARM64 builds.
+template fetch*(r: var ReverseBits, data: openArray[char], n: int,
+                direct: static bool = false): bool =
+  block:
+    let needed = n
+    # Callers request at most 31 bits; a 32-bit refill fits the 64-bit cache.
+    if r.count < needed and r.pos-r.start >= 4:
+      when direct:
+        var word: uint32
+        littleEndian32(addr word, unsafeAddr data[r.pos-4])
+        r.bits = (r.bits shl 32) or uint64(word)
+      else:
+        var p = r.pos-4
+        r.bits = (r.bits shl 32) or readLe(data, p, 4)
+      r.pos -= 4
+      r.count += 32
+    while r.count < needed and r.pos > r.start:
+      dec r.pos
+      r.bits = (r.bits shl 8) or uint64(ord(data[r.pos]))
+      r.count += 8
+    r.count >= needed
 
-proc take*(r: var ReverseBits, data: openArray[char], n: int): int {.inline.} =
-  if r.count < n: require(r.fetch(data, n), "truncated bitstream")
-  r.count -= n
-  int((r.bits shr r.count) and mask(n))
+template take*(r: var ReverseBits, data: openArray[char], n: int): int =
+  block:
+    let width = n
+    if r.count < width: require(r.fetch(data, width, true), "truncated bitstream")
+    r.count -= width
+    int((r.bits shr r.count) and mask(width))
 
 proc finished*(r: ReverseBits): bool {.inline.} = r.pos == r.start and r.count == 0
 

@@ -101,6 +101,7 @@ proc sinkWrite(s: Stream, buffer: pointer, size: int) =
   doAssert size <= BlockSize+3
   output.written += size
 let large = repeat("abcdefgh", 1000000)
+doAssert unpacked(compress(large) & compress("tail")) == large & "tail"
 let input = source(large, 97)
 let sink = Sink(input: input, writeDataImpl: sinkWrite)
 compress(input, sink)

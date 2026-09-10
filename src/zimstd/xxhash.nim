@@ -1,5 +1,6 @@
 ## xxHash64, seed zero, used by Zstandard content checksums.
 import common
+import std/endians
 const
   P1 = 11400714785074694791'u64
   P2 = 14029467366897019727'u64
@@ -9,6 +10,12 @@ const
 proc rot(x: uint64, n: int): uint64 {.inline.} = (x shl n) or (x shr (64-n))
 proc round(acc, x: uint64): uint64 {.inline.} = rot(acc+x*P2, 31)*P1
 proc merge(acc, x: uint64): uint64 {.inline.} = (acc xor round(0, x))*P1+P4
+template readWord(data: openArray[char], p: var int): uint64 =
+  block: # Stripe callers have already checked all 32 bytes are available.
+    var word: uint64
+    littleEndian64(addr word, unsafeAddr data[p])
+    p += 8
+    word
 proc finishHash(value: uint64, data: openArray[char]): uint64 =
   result = value
   var p = 0
@@ -32,10 +39,10 @@ proc xxh64*(data: openArray[char]): uint64 =
     var c = 0'u64
     var d = 0'u64-P1
     while p <= data.len-32:
-      a = round(a, readLe(data, p, 8))
-      b = round(b, readLe(data, p, 8))
-      c = round(c, readLe(data, p, 8))
-      d = round(d, readLe(data, p, 8))
+      a = round(a, readWord(data, p))
+      b = round(b, readWord(data, p))
+      c = round(c, readWord(data, p))
+      d = round(d, readWord(data, p))
     result = rot(a, 1)+rot(b, 7)+rot(c, 12)+rot(d, 18)
     result = merge(merge(merge(merge(result, a), b), c), d)
   else: result = P5
@@ -52,7 +59,7 @@ proc initXxh64*(): Xxh64State =
   result.lanes = [P1+P2, P2, 0'u64, 0'u64-P1]
 
 proc stripe(h: var Xxh64State, data: openArray[char], p: var int) =
-  for lane in h.lanes.mitems: lane = round(lane, readLe(data, p, 8))
+  for lane in h.lanes.mitems: lane = round(lane, readWord(data, p))
 
 proc update*(h: var Xxh64State, data: openArray[char]) =
   h.total += uint64(data.len)

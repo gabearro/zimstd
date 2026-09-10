@@ -146,3 +146,41 @@ let huffFrame = readFile(currentSourcePath.parentDir / "vectors" / "huffman-9.zs
 let huffRaw = readFile(currentSourcePath.parentDir / "vectors" / "huffman-9.raw")
 doAssert decompress(huffFrame & frame(rawLiterals, 100, 2)) == huffRaw & repeat('k', 100)
 echo "sparse/dense block transitions and borrowed literals passed"
+
+# Every mismatch byte within an unaligned word, plus the short end-of-input
+# tail, must preserve exact match lengths without reading past the input.
+for alignment in 0..7:
+  for shared in 4..20:
+    let pattern = "abcdefghijklmnopqrstuvwxyz"
+    for tail in ["!", "!01234567890123456789"]:
+      let data = repeat('~', alignment) & pattern & "|" & pattern[0..<shared] & tail
+      for level in [-3,3,9,22]:
+        doAssert decompress(compress(data, level = level)) == data
+
+echo "word match lengths and short tails passed"
+
+block:
+  var calls = 0
+  proc width(): int =
+    inc calls
+    3
+  let data = "\xff\x01"
+  var r = initReverse(data, 0, data.len)
+  doAssert r.take(data, width()) == 7 and calls == 1
+  doAssert r.fetch(data, width()) and calls == 2
+
+# Length-code and literal-header boundaries, including a raw fallback between
+# compressed blocks: writing directly into the frame must preserve its prefix.
+block:
+  var noise = newString(BlockSize)
+  for c in noise.mitems: c = char(rng.rand(255))
+  for bases in [@LlBase, @MlBase, @[31,32,4095,4096,BlockSize-1]]:
+    for base in bases:
+      for delta in -1..1:
+        let n = max(0, base+delta)
+        for data in [noise[0..<n] & repeat("abcd", 1024),
+                     "abcd" & repeat('z', n) & "tail"]:
+          doAssert decompress(compress(data)) == data
+  let data = repeat("abcd", BlockSize div 4) & noise & repeat("efgh", BlockSize div 4)
+  doAssert decompress(compress(data)) == data
+echo "length codes, literal headers, and output rollback passed"
